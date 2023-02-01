@@ -33,7 +33,7 @@ public class TileDisplayer : MonoBehaviour
         tile.onRevealedChanged -= onRevealedChanged;
         if (register)
         {
-            tile.onRevealedChanged -= onRevealedChanged;
+            tile.onRevealedChanged += onRevealedChanged;
         }
     }
 

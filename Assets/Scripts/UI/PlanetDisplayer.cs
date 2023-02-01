@@ -40,6 +40,8 @@ public class PlanetDisplayer : MonoBehaviour
         go.transform.position = (Vector2)v;
         TileDisplayer tileDisplayer = go.GetComponent<TileDisplayer>();
         tileDisplayer.init(tile);
+        TileController tileController = go.GetComponent<TileController>();
+        tileController.init(tile);
         return tileDisplayer;
     }
 }
