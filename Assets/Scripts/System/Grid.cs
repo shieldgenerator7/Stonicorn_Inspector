@@ -31,6 +31,8 @@ public class Grid<T> where T : class
         return t;
     }
 
+    public T this[Vector2Int pos] => get(pos);
+
     public List<Vector2Int> positions => grid.Keys.ToList();
 
     public List<T> getNeighbors(Vector2Int v)
