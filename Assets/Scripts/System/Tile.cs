@@ -20,5 +20,10 @@ public class Tile
     public delegate void OnBool(bool value);
     public event OnBool onRevealedChanged;
 
+    public Tile(Vector2Int pos)
+    {
+        this.position = pos;
+    }
+
     public static implicit operator bool(Tile tile) => tile != null;
 }

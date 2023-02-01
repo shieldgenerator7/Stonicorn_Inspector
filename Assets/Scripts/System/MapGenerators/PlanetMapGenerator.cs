@@ -15,7 +15,7 @@ public class PlanetMapGenerator : MapGenerator
                 Vector2Int pos = new Vector2Int(x, y);
                 if (pos.magnitude <= radius)
                 {
-                    grid.add(pos, default);
+                    grid.add(pos, new Tile(pos));
                 }
             }
         }
