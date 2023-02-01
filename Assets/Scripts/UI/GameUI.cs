@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameUI : MonoBehaviour
 {
     public PlanetDisplayer planetDisplayer;
-    public MapGenerator mapGenerator;
+    public List<MapGenerator> mapGenerators;
 
     [SerializeField]
     private Game game;
@@ -16,6 +16,8 @@ public class GameUI : MonoBehaviour
     {
         game = new Game();
         planetDisplayer.init(game.planet);
-        game.planet.generate(mapGenerator);
+        mapGenerators.ForEach(mapGenerator => 
+            game.planet.generate(mapGenerator)
+        );
     }
 }

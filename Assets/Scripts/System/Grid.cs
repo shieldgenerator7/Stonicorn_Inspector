@@ -27,6 +27,10 @@ public class Grid<T> where T : class
     #region Accessors
     public T get(Vector2Int v)
     {
+        if (!grid.ContainsKey(v))
+        {
+            return null;
+        }
         T t = grid[v];
         return t;
     }
