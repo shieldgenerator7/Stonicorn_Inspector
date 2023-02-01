@@ -6,6 +6,11 @@ public class TileDisplayer : MonoBehaviour
 {
     public SpriteRenderer cover;
     public SpriteRenderer contents;
+    public SpriteRenderer detector;
+    public SpriteRenderer detectorFill;
+
+    public SpriteSet spritesDetector;
+    public SpriteSet spritesDetectorFill;
 
     private Tile tile;
 
@@ -42,7 +47,14 @@ public class TileDisplayer : MonoBehaviour
     {
         onRevealedChanged(tile.Revealed);
         //Contents
-        contents.gameObject.SetActive(tile.objects.Count > 0);
+        int contentCount = tile.objects.Count;
+        contents.gameObject.SetActive(contentCount > 0);
+        //Detector
+        detector.gameObject.SetActive(
+            tile.hazardCount > 0 && contentCount == 0
+            );
+        detector.sprite = spritesDetector[tile.hazardCount];
+        detectorFill.sprite = spritesDetectorFill[tile.hazardCount];
     }
 
     private void onRevealedChanged(bool revealed)

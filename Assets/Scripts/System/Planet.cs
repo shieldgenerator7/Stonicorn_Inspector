@@ -7,7 +7,7 @@ using UnityEngine;
 public class Planet
 {
     public string name;
-    private Grid<Tile> map;
+    public Grid<Tile> map { get; private set; }
     public Vector2Int Size => map.Max - map.Min;
 
     public Planet()

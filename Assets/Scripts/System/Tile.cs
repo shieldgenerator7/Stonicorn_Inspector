@@ -6,6 +6,7 @@ public class Tile
 {
     public Vector2Int position;
     public List<TileObject> objects = new List<TileObject>();
+    public int hazardCount = 0;
 
     private bool revealed = false;
     public bool Revealed

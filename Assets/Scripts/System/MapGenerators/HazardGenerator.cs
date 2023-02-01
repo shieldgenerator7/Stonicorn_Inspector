@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Hazard", menuName = "MapGenerator/Hazard")]
@@ -25,5 +26,10 @@ public class HazardGenerator : MapGenerator
                 hazards++;
             }
         }
+        grid.positions.ForEach(v =>
+        {
+            grid[v].hazardCount = grid.getNeighbors(v)
+                .Count(t => t && t.objects.Count > 0);
+        });
     }
 }
