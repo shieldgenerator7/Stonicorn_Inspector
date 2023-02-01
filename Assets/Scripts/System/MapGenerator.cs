@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MapGenerator<T> : ScriptableObject where T : class
+public abstract class MapGenerator : ScriptableObject
 {
-    public abstract void generate(Grid<T> grid);
+    public abstract void generate(Grid<Tile> grid);
 }

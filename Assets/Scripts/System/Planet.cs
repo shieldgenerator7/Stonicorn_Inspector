@@ -16,7 +16,7 @@ public class Planet
         map.onGridChanged += (grid) => onMapChanged?.Invoke(grid);
     }
 
-    public void generate(MapGenerator<Tile> mapGenerator)
+    public void generate(MapGenerator mapGenerator)
     {
         mapGenerator.generate(map);
         onMapChanged?.Invoke(map);
