@@ -11,22 +11,18 @@ public class HazardGenerator : MapGenerator
         Vector2Int min = grid.Min;
         Vector2Int max = grid.Max;
         int hazards = 0;
-        for (int x = min.x; x <= max.x; x++)
+        while (hazards < hazardCount)
         {
-            for (int y = min.y; y <= max.y; y++)
+            Vector2Int pos = new Vector2Int(
+                Random.Range(min.x, max.x),
+                Random.Range(min.y, max.y)
+                );
+            Tile tile = grid[pos];
+            if (tile && tile.objects.Count == 0)
             {
-                if (hazards == hazardCount)
-                {
-                    return;
-                }
-                Vector2Int pos = new Vector2Int(x, y);
-                Tile tile = grid[pos];
-                if (tile)
-                {                    
-                    Hazard hazard = new Hazard();
-                    tile.objects.Add(hazard);
-                    hazards++;
-                }
+                Hazard hazard = new Hazard();
+                tile.objects.Add(hazard);
+                hazards++;
             }
         }
     }
