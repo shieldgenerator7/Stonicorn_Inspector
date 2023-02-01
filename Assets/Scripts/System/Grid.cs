@@ -7,18 +7,24 @@ public class Grid<T> where T : class
 {
     private Dictionary<Vector2Int, T> grid = new Dictionary<Vector2Int, T>();
 
+    #region Mutators
     public void add(Vector2Int v, T t)
     {
         grid[v] = t;
+        onGridChanged?.Invoke(this);
     }
 
-    public T remove(Vector2Int v)
+    public void remove(Vector2Int v)
     {
-        T t = grid[v];
         grid.Remove(v);
-        return t;
+        onGridChanged?.Invoke(this);
     }
 
+    public delegate void OnGridChanged(Grid<T> grid);
+    public event OnGridChanged onGridChanged;
+    #endregion
+
+    #region Accessors
     public T get(Vector2Int v)
     {
         T t = grid[v];
@@ -56,4 +62,5 @@ public class Grid<T> where T : class
             return new Vector2Int(keys.Max(v => v.x), keys.Max(v => v.y));
         }
     }
+    #endregion
 }

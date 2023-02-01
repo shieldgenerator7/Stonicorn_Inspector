@@ -13,6 +13,6 @@ public class Game
         planet = new Planet();
         PlanetMapGenerator<Tile> pmg = new PlanetMapGenerator<Tile>();
         pmg.radius = radius;
-        pmg.generate(planet.map);
+        planet.generate(pmg);
     }
 }
