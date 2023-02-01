@@ -26,4 +26,5 @@ public class Tile
     }
 
     public static implicit operator bool(Tile tile) => tile != null;
+    public override string ToString() => $"Tile ({position.x}, {position.y})";
 }
