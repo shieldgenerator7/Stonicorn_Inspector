@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tile
 {
     public Vector2Int position;
-    public List<TileObject> objects;
+    public List<TileObject> objects = new List<TileObject>();
 
     private bool revealed = false;
     public bool Revealed

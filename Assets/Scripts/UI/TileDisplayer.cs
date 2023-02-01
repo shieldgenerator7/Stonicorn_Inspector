@@ -5,6 +5,7 @@ using UnityEngine;
 public class TileDisplayer : MonoBehaviour
 {
     public SpriteRenderer cover;
+    public SpriteRenderer contents;
 
     private Tile tile;
 
@@ -40,6 +41,8 @@ public class TileDisplayer : MonoBehaviour
     private void forceUpdate()
     {
         onRevealedChanged(tile.Revealed);
+        //Contents
+        contents.gameObject.SetActive(tile.objects.Count > 0);
     }
 
     private void onRevealedChanged(bool revealed)
