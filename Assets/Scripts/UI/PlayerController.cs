@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 2;
 
-    private Vector2 movePos = Vector2.zero;
+    public Vector2 movePos = Vector2.zero;
 
     public Vector2 Position
     {
@@ -27,10 +27,10 @@ public class PlayerController : MonoBehaviour
         {
             Position = Vector2.Lerp(Position, movePos, moveSpeed * Time.deltaTime);
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            movePos = pos;
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    movePos = pos;
+        //}
     }
 }

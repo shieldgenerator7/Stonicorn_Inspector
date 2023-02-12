@@ -37,6 +37,7 @@ public class TileController : MonoBehaviour
                 {
                     tile.Revealed = true;
                 }
+                FindObjectOfType<PlayerController>().movePos = transform.position;
             }
             if (rightclick)
             {
