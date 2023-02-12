@@ -33,11 +33,17 @@ public class TileController : MonoBehaviour
         {
             if (leftclick)
             {
-                tile.Revealed = true;
+                if (!tile.Flagged)
+                {
+                    tile.Revealed = true;
+                }
             }
             if (rightclick)
             {
-                tile.Flagged = true;
+                if (!tile.Revealed)
+                {
+                    tile.Flagged = !tile.Flagged;
+                }
             }
         }
     }
