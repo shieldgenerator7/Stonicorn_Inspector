@@ -12,6 +12,8 @@ public class TileDisplayer : MonoBehaviour
     public SpriteSet spritesDetector;
     public SpriteSet spritesDetectorFill;
 
+    public GameObject flag;
+
     private Tile tile;
 
     public void init(Tile tile)
@@ -37,9 +39,11 @@ public class TileDisplayer : MonoBehaviour
     private void registerDelegates(bool register)
     {
         tile.onRevealedChanged -= onRevealedChanged;
+        tile.onFlaggedChanged -= onFlaggedChanged;
         if (register)
         {
             tile.onRevealedChanged += onRevealedChanged;
+            tile.onFlaggedChanged += onFlaggedChanged;
         }
     }
 
@@ -60,5 +64,10 @@ public class TileDisplayer : MonoBehaviour
     private void onRevealedChanged(bool revealed)
     {
         cover.gameObject.SetActive(!revealed);
+    }
+
+    private void onFlaggedChanged(bool flagged)
+    {
+        flag.SetActive(flagged);
     }
 }

@@ -21,6 +21,18 @@ public class Tile
     public delegate void OnBool(bool value);
     public event OnBool onRevealedChanged;
 
+    private bool flagged = false;
+    public bool Flagged
+    {
+        get => flagged;
+        set
+        {
+            flagged = value;
+            onFlaggedChanged?.Invoke(flagged);
+        }
+    }
+    public event OnBool onFlaggedChanged;
+
     public Tile(Vector2Int pos)
     {
         this.position = pos;
