@@ -25,7 +25,16 @@ public class PlayerController : MonoBehaviour
     {
         if (Position != movePos)
         {
-            Position = Vector2.Lerp(Position, movePos, moveSpeed * Time.deltaTime);
+            Vector2 dir = (movePos - Position).normalized;
+            Position += dir * Mathf.Min(
+                moveSpeed * Time.deltaTime,
+                Vector2.Distance(Position, movePos)
+                );
+            if (Mathf.Approximately(Vector2.Distance(Position,movePos),0))
+            {
+                Position = movePos;
+                onPosReached?.Invoke(Position);
+            }
         }
         //if (Input.GetMouseButtonDown(0))
         //{
@@ -33,4 +42,6 @@ public class PlayerController : MonoBehaviour
         //    movePos = pos;
         //}
     }
+    public delegate void OnPosReached(Vector2 pos);
+    public event OnPosReached onPosReached;
 }
