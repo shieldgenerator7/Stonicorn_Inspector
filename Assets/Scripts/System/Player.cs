@@ -18,11 +18,11 @@ public class Player : Entity
     public Detector FollowDetector => followDetector;
     private List<Detector> detectors = new List<Detector>();
 
-    public void init (Planet planet)
     public Player(Game game) : base(game)
-    {//
+    {
         onPositionChanged += (pos) => followDetector?.detect(pos.toVector2Int());
-    }//
+    }
+    public void init(Planet planet)
     {
         followDetector = new Detector(planet.map, 2);
         followDetector.detect(Position.toVector2Int());
