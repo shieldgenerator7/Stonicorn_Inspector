@@ -21,27 +21,5 @@ public class TileController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool leftclick = Input.GetMouseButtonDown(0);
-        bool rightclick = Input.GetMouseButtonDown(1);
-        bool overlap = false;
-        if (leftclick || rightclick)
-        {
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            overlap = coll2d.OverlapPoint(pos);
-        }
-        if (overlap)
-        {
-            if (leftclick)
-            {
-                FindObjectOfType<PlayerController>().player.movePos = transform.position;
-            }
-            if (rightclick)
-            {
-                if (!tile.Revealed)
-                {
-                    tile.Flagged = !tile.Flagged;
-                }
-            }
-        }
     }
 }

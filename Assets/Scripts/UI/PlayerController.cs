@@ -13,11 +13,30 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    movePos = pos;
-        //}
+        //Receive input
+        bool leftclick = Input.GetMouseButtonDown(0);
+        bool rightclick = Input.GetMouseButtonDown(1);
+        Vector2 mousePos = Vector2.zero;
+        Tile overlapTile = null;
+        if (leftclick || rightclick)
+        {
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            overlapTile = player.game.planet.map[mousePos.toVector2Int()];
+        }
+        if (leftclick)
+        {
+            player.movePos = mousePos;
+        }
+        if (overlapTile != null)
+        {
+            if (rightclick)
+            {
+                if (!overlapTile.Revealed)
+                {
+                    overlapTile.Flagged = !overlapTile.Flagged;
+                }
+            }
+        }
 
         //Update player actions
         player.move();
