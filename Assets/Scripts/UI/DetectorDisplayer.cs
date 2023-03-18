@@ -23,4 +23,9 @@ public class DetectorDisplayer : MonoBehaviour
         goDetector.SetActive(count > 0);
         txtDetector.text = $"{count}";
     }
+
+    private void Update()
+    {
+        detector.detect();
+    }
 }
