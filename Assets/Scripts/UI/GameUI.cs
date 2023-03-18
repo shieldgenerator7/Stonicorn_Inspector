@@ -7,6 +7,8 @@ public class GameUI : MonoBehaviour
     public PlanetDisplayer planetDisplayer;
     public List<PlanetGeneration> planetGenerationList;
 
+    public GameObject enemyPrefab;//TODO: move this process elsewhere
+
     [SerializeField]
     private Game game;
     public Game Game => game;
@@ -19,5 +21,13 @@ public class GameUI : MonoBehaviour
         planetDisplayer.init(game.planet);
         FindObjectOfType<PlayerController>().player = game.player;
         FindObjectOfType<PlayerDisplayer>().init(game.player);
+        game.enemies.ForEach(enemy => makeEnemy(enemy));
+    }
+
+    void makeEnemy(Enemy enemy)
+    {
+        GameObject goEnemy = Instantiate(enemyPrefab);
+        goEnemy.transform.position = enemy.Position;
+        goEnemy.GetComponent<EnemyDisplayer>().init(enemy);
     }
 }

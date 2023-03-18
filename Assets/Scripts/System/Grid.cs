@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +60,9 @@ public class Grid<T> where T : class
         }
         return neighbors;
     }
+
+    public List<T> FindAll(Func<T, bool> filter)
+        => grid.Values.ToList().FindAll((val) => filter(val)).ToList();
 
     public Vector2Int Min
     {
