@@ -26,10 +26,5 @@ public class HazardGenerator : MapGenerator
                 hazards++;
             }
         }
-        grid.positions.ForEach(v =>
-        {
-            grid[v].hazardCount = grid.getNeighbors(v)
-                .Count(t => t && t.objects.Count > 0);
-        });
     }
 }
