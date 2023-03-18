@@ -27,23 +27,20 @@ public class PlayerController : MonoBehaviour
         {
             player.movePos = mousePos.toVector2Int();
         }
-        if (overlapTile != null)
+        if (rightclick)
         {
-            if (rightclick)
+            if (!overlapTile || overlapTile.Revealed)
             {
-                if (!overlapTile.Revealed)
-                {
-                    overlapTile.Flagged = !overlapTile.Flagged;
-                }
+                player.placeDetector(mousePos.toVector2Int());
+            }
+            if (overlapTile && !overlapTile.Revealed)
+            {
+                overlapTile.Flagged = !overlapTile.Flagged;
             }
         }
 
         //Update player actions
         player.move();
-        bool tileRevealed = player.tryReveal();
-        if (tileRevealed)
-        {
-            player.placeDetector(player.movePos.toVector2Int());
-        }
+        player.tryReveal();
     }
 }
