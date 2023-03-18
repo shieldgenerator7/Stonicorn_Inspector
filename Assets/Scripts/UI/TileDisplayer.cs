@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TileDisplayer : MonoBehaviour
 {
     public SpriteRenderer cover;
     public SpriteRenderer contents;
-    public SpriteRenderer detector;
-    public SpriteRenderer detectorFill;
+    public GameObject detector;
+    public TMP_Text txtDetector;
 
     public SpriteSet spritesDetector;
     public SpriteSet spritesDetectorFill;
@@ -57,13 +58,14 @@ public class TileDisplayer : MonoBehaviour
         detector.gameObject.SetActive(
             tile.hazardCount > 0 && contentCount == 0
             );
-        detector.sprite = spritesDetector[tile.hazardCount];
-        detectorFill.sprite = spritesDetectorFill[tile.hazardCount];
+        detector.SetActive(tile.Revealed && tile.hazardCount > 0);
+        txtDetector.text = $"{tile.hazardCount}";
     }
 
     private void onRevealedChanged(bool revealed)
     {
         cover.gameObject.SetActive(!revealed);
+        detector.SetActive(tile.Revealed && tile.hazardCount > 0);
     }
 
     private void onFlaggedChanged(bool flagged)
