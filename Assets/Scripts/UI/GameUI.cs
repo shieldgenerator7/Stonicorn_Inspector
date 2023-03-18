@@ -16,5 +16,6 @@ public class GameUI : MonoBehaviour
         game = new Game();
         game.startGame(planetGenerationList.randomItem());
         planetDisplayer.init(game.planet);
+        FindObjectOfType<PlayerController>().player = game.player;
     }
 }

@@ -33,9 +33,9 @@ public class TileController : MonoBehaviour
         {
             if (leftclick)
             {
-                FindObjectOfType<PlayerController>().movePos = transform.position;
-                FindObjectOfType<PlayerController>().onPosReached -= revealThis;
-                FindObjectOfType<PlayerController>().onPosReached += revealThis;
+                FindObjectOfType<PlayerController>().player.movePos = transform.position;
+                FindObjectOfType<PlayerController>().player.onPosReached -= revealThis;
+                FindObjectOfType<PlayerController>().player.onPosReached += revealThis;
             }
             if (rightclick)
             {
@@ -56,6 +56,6 @@ public class TileController : MonoBehaviour
                 tile.Revealed = true;
             }
         }
-        FindObjectOfType<PlayerController>().onPosReached -= revealThis;
+        FindObjectOfType<PlayerController>().player.onPosReached -= revealThis;
     }
 }
