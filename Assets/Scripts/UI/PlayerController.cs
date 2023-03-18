@@ -7,9 +7,12 @@ public class PlayerController : MonoBehaviour
     public Player player;
     public GameObject detectorPrefab;
 
+    private Detector followDetector;
+
     private void Start()
     {
         player.onDetectorAdded += makeDetector;
+        followDetector = player.placeDetector(player.Position.toVector2Int(), 2);
     }
 
     // Update is called once per frame
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
         //}
 
         player.move();
+        followDetector.detect(player.Position.toVector2Int());
         bool tileRevealed = player.tryReveal();
         if (tileRevealed)
         {
@@ -33,7 +37,6 @@ public class PlayerController : MonoBehaviour
     public void makeDetector(Detector detector)
     {
         GameObject goDetect = Instantiate(detectorPrefab);
-        goDetect.transform.position = (Vector2)detector.Position;
         goDetect.GetComponent<DetectorDisplayer>().init(detector);
     }
 }

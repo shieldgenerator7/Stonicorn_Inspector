@@ -92,18 +92,20 @@ public class Player
         return false;
     }
 
-    public void placeDetector(Vector2Int pos)
+    public Detector placeDetector(Vector2Int pos, int range = 1)
     {
         //Early exit: already a detector at that pos
-        if (detectors.Any(d => d.Position == pos))
+        Detector existing = detectors.Find(d => d.Position == pos);
+        if (existing != null)
         {
-            return;
+            return existing;
         }
         //
-        Detector detector = new Detector(game.planet.map, 1);
+        Detector detector = new Detector(game.planet.map, range);
         detector.detect(pos);
         detectors.Add(detector);
         onDetectorAdded?.Invoke(detector);
+        return detector;
     }
     public delegate void OnDetectorEvent(Detector detectors);
     public event OnDetectorEvent onDetectorAdded;
