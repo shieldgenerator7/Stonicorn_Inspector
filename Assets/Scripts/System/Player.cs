@@ -20,8 +20,9 @@ public class Player
 
     public Game game;
 
+    private Detector followDetector;
+    public Detector FollowDetector => followDetector;
     private List<Detector> detectors = new List<Detector>();
-
 
     public Vector2 movePos = Vector2.zero;
 
@@ -33,6 +34,7 @@ public class Player
         {
             position = value;
             gridPos = position.toVector2Int();
+            followDetector?.detect(position.toVector2Int());
             onPositionChanged?.Invoke(position);
         }
     }
@@ -40,6 +42,16 @@ public class Player
     public event OnPositionChanged onPositionChanged;
 
     private Vector2Int gridPos;
+
+    public Player(Game game)
+    {
+        this.game = game;
+    }
+    public void init (Planet planet)
+    {
+        followDetector = new Detector(planet.map, 2);
+        followDetector.detect(Position.toVector2Int());
+    }
 
     public void move()
     {

@@ -10,8 +10,7 @@ public class Game
 
     public Game(Player player = null)
     {
-        this.player = player ?? new Player();
-        this.player.game = this;
+        this.player = player ?? new Player(this);
     }
 
     public void startGame(PlanetGeneration planetGeneration)
@@ -24,5 +23,7 @@ public class Game
         Vector2 startPos = new Vector2((min.x + max.x) / 2, max.y + 2);
         player.Position = startPos;
         player.movePos = player.Position;
+        //Init player
+        player.init(planet);
     }
 }

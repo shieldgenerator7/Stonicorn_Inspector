@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2170804961420896069}
   - component: {fileID: 978079635293386036}
   - component: {fileID: 2744823832346425417}
+  - component: {fileID: 5788268476028580737}
   m_Layer: 0
   m_Name: stonicorn
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &978079635293386036
 SpriteRenderer:
@@ -95,6 +96,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a31e6baa73a251441812726ae65b1b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5788268476028580737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3428049024660737893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244e9945055310045a665c6e07599f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   detectorPrefab: {fileID: 4286372227161998022, guid: d472bac43eca80e49a2bf5352710d37d, type: 3}
