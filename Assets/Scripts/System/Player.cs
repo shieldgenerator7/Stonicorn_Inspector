@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Player
+public class Player : Entity
 {
-    /// <summary>
-    /// How fast the player can move in units per second
-    /// </summary>
-    public float moveSpeed = 2;
     /// <summary>
     /// How far away the player can see from themselves
     /// </summary>
@@ -18,59 +14,19 @@ public class Player
     /// </summary>
     public int inspectRange = 2;
 
-    public Game game;
-
     private Detector followDetector;
     public Detector FollowDetector => followDetector;
     private List<Detector> detectors = new List<Detector>();
 
-    public Vector2 movePos = Vector2.zero;
-
-    private Vector2 position;
-    public Vector2 Position
-    {
-        get => position;
-        set
-        {
-            position = value;
-            gridPos = position.toVector2Int();
-            followDetector?.detect(position.toVector2Int());
-            onPositionChanged?.Invoke(position);
-        }
-    }
-    public delegate void OnPositionChanged(Vector2 position);
-    public event OnPositionChanged onPositionChanged;
-
-    private Vector2Int gridPos;
-
-    public Player(Game game)
-    {
-        this.game = game;
-    }
     public void init (Planet planet)
+    public Player(Game game) : base(game)
+    {//
+        onPositionChanged += (pos) => followDetector?.detect(pos.toVector2Int());
+    }//
     {
         followDetector = new Detector(planet.map, 2);
         followDetector.detect(Position.toVector2Int());
     }
-
-    public void move()
-    {
-        if (Position != movePos)
-        {
-            Vector2 dir = (movePos - Position).normalized;
-            Position += dir * Mathf.Min(
-                moveSpeed * Time.deltaTime,
-                Vector2.Distance(Position, movePos)
-                );
-            if (Mathf.Approximately(Vector2.Distance(Position, movePos), 0))
-            {
-                Position = movePos;
-                onPosReached?.Invoke(Position);
-            }
-        }
-    }
-    public delegate void OnPosReached(Vector2 pos);
-    public event OnPosReached onPosReached;
 
     /// <summary>
     /// Reveals the destination tile if it can
