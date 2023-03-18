@@ -20,7 +20,6 @@ public class DetectorDisplayer : MonoBehaviour
 
     void updateDetection(int count)
     {
-        transform.position = (Vector2)detector.Position;
         goDetector.SetActive(count > 0);
         txtDetector.text = $"{count}";
     }

@@ -8,11 +8,15 @@ public class PlayerController : MonoBehaviour
     public GameObject detectorPrefab;
 
     private Detector followDetector;
+    private DetectorDisplayer followDetectorDisplayer;
 
     private void Start()
     {
-        player.onDetectorAdded += makeDetector;
-        followDetector = player.placeDetector(player.Position.toVector2Int(), 2);
+        player.onDetectorAdded += (detector) => makeDetector(detector);
+        //Make follow detector
+        followDetector = new Detector(player.game.planet.map, 2);
+        followDetectorDisplayer = makeDetector(followDetector);
+        followDetector.detect(player.Position.toVector2Int());
     }
 
     // Update is called once per frame
@@ -24,19 +28,26 @@ public class PlayerController : MonoBehaviour
         //    movePos = pos;
         //}
 
+        //Update player actions
         player.move();
-        followDetector.detect(player.Position.toVector2Int());
+        Vector2 pos = player.Position;
+        followDetector.detect(pos.toVector2Int());
         bool tileRevealed = player.tryReveal();
         if (tileRevealed)
         {
             player.placeDetector(player.movePos.toVector2Int());
         }
-        transform.position = player.Position;
+        //Update display
+        transform.position = pos;
+        followDetectorDisplayer.transform.position = pos;
     }
 
-    public void makeDetector(Detector detector)
+    public DetectorDisplayer makeDetector(Detector detector)
     {
         GameObject goDetect = Instantiate(detectorPrefab);
-        goDetect.GetComponent<DetectorDisplayer>().init(detector);
+        goDetect.transform.position = (Vector2)detector.Position;
+        DetectorDisplayer detectorDisplayer = goDetect.GetComponent<DetectorDisplayer>();
+        detectorDisplayer.init(detector);
+        return detectorDisplayer;
     }
 }
