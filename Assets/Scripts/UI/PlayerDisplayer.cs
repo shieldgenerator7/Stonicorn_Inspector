@@ -8,7 +8,7 @@ public class PlayerDisplayer : MonoBehaviour
     private Player player;
     public GameObject detectorPrefab;
 
-    private DetectorDisplayer followDetectorDisplayer;
+    public DetectorDisplayer followDetectorDisplayer;
 
     // Start is called before the first frame update
     public void init(Player player)
@@ -16,7 +16,7 @@ public class PlayerDisplayer : MonoBehaviour
         this.player = player;
         this.player.onDetectorAdded += (detector) => makeDetector(detector);
         //Make follow detector
-        followDetectorDisplayer = makeDetector(this.player.FollowDetector);
+        followDetectorDisplayer.init(player.FollowDetector);
     }
 
     // Update is called once per frame
@@ -25,7 +25,6 @@ public class PlayerDisplayer : MonoBehaviour
         //Update display
         Vector2 pos = player.Position;
         transform.position = pos;
-        followDetectorDisplayer.transform.position = pos;
     }
 
     public DetectorDisplayer makeDetector(Detector detector)
