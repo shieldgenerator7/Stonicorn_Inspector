@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         }
         if (leftclick)
         {
-            player.movePos = mousePos;
+            player.movePos = mousePos.toVector2Int();
         }
         if (overlapTile != null)
         {
