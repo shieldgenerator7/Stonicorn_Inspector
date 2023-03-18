@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class DetectorDisplayer : MonoBehaviour
 
     public List<Color> colors;
 
+    public GameObject goDetector;
     public Image imgDetector;
     public TMP_Text txtDetector;
 
@@ -23,6 +25,12 @@ public class DetectorDisplayer : MonoBehaviour
 
     void updateDetection(int count)
     {
+        //Visible
+        goDetector.SetActive(count > 0 ||
+            detector.game.planet.map
+            .getNeighbors(detector.Pos, detector.Range)
+            .Any(tile => tile)
+            );
         //Color
         Color color = colors[Mathf.Clamp(count, 0, colors.Count - 1)];
         imgDetector.color = color;

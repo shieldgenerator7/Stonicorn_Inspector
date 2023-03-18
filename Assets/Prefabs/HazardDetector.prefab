@@ -51,6 +51,7 @@ MonoBehaviour:
   - {r: 0.9622642, g: 0.56654274, b: 0.013616921, a: 1}
   - {r: 0.990566, g: 0.41705233, b: 0.1541919, a: 1}
   - {r: 1, g: 0, b: 0.17502451, a: 1}
+  goDetector: {fileID: 2472708387099873036}
   imgDetector: {fileID: 157571926618029263}
   txtDetector: {fileID: 4343371267927525039}
 --- !u!1001 &711746880310263108
@@ -165,6 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2472708387099873036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3148140560789090888, guid: d561362ec46ed3a4b823d1395ff1e323, type: 3}
+  m_PrefabInstance: {fileID: 711746880310263108}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4343371267927525039 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3865886335115459563, guid: d561362ec46ed3a4b823d1395ff1e323, type: 3}
