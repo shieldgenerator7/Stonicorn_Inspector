@@ -262,7 +262,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8261892162646962505}
   - component: {fileID: 6956642055453103631}
-  - component: {fileID: -5506963352909878641}
   - component: {fileID: -4002262014896286290}
   m_Layer: 0
   m_Name: Tile
@@ -307,18 +306,6 @@ MonoBehaviour:
   spritesDetector: {fileID: 11400000, guid: 99c209182b6dd21489f6b5bf1811129a, type: 2}
   spritesDetectorFill: {fileID: 11400000, guid: 26a6f7d179a456143b60528511133ad8, type: 2}
   flag: {fileID: 8593606508824441282}
---- !u!114 &-5506963352909878641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3222728456693260015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 668bbff4e17b21a4bb8681eb45cc9d3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &-4002262014896286290
 BoxCollider2D:
   m_ObjectHideFlags: 0
