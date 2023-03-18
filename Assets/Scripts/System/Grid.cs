@@ -39,12 +39,19 @@ public class Grid<T> where T : class
 
     public List<Vector2Int> positions => grid.Keys.ToList();
 
-    public List<T> getNeighbors(Vector2Int v)
+    /// <summary>
+    /// Returns a list of all objects in the grid
+    /// within the given range of the given coordinate, including the coordinate
+    /// </summary>
+    /// <param name="v"></param>
+    /// <param name="range"></param>
+    /// <returns></returns>
+    public List<T> getNeighbors(Vector2Int v, int range = 1)
     {
         List<T> neighbors = new List<T>();
-        for (int x = v.x - 1; x <= v.x + 1; x++)
+        for (int x = v.x - range; x <= v.x + range; x++)
         {
-            for (int y = v.y - 1; y <= v.y + 1; y++)
+            for (int y = v.y - range; y <= v.y + range; y++)
             {
                 Vector2Int neighborV = new Vector2Int(x, y);
                 neighbors.Add(get(neighborV));

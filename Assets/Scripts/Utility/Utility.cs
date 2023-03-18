@@ -9,6 +9,10 @@ public static class Utility
     {
         return new Vector2Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.y));
     }
+    public static Vector2Int toVector2Int(this Vector3 v)
+    {
+        return new Vector2Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.y));
+    }
 
     public static T randomItem<T>(this List<T> list)
     {
