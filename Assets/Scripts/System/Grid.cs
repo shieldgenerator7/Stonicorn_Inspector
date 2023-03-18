@@ -64,6 +64,9 @@ public class Grid<T> where T : class
     public List<T> FindAll(Func<T, bool> filter)
         => grid.Values.ToList().FindAll((val) => filter(val)).ToList();
 
+    public bool Any(Func<T, bool> filter)
+        => grid.Values.Any((val) => filter(val));
+
     public Vector2Int Min
     {
         get
