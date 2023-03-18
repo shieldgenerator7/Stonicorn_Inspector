@@ -317,8 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31e6baa73a251441812726ae65b1b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
-  movePos: {x: 0, y: 0}
+  detectorPrefab: {fileID: 4286372227161998022, guid: d472bac43eca80e49a2bf5352710d37d, type: 3}
 --- !u!212 &1471753330
 SpriteRenderer:
   m_ObjectHideFlags: 0

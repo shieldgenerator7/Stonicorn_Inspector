@@ -11,12 +11,11 @@ public class DetectorDisplayer : MonoBehaviour
     public TMP_Text txtDetector;
 
     // Start is called before the first frame update
-    void Start()
+    public void init(Detector detector)
     {
-        Planet planet = FindObjectOfType<GameUI>().Game.planet;
-        detector = new Detector(planet.map);
-        detector.onDetectedAmountChanged += updateDetection;
-        detector.detect(transform.position.toVector2Int());
+        this.detector = detector;
+        this.detector.onDetectedAmountChanged += updateDetection;
+        updateDetection(detector.Detected);
     }
 
     void updateDetection(int count)

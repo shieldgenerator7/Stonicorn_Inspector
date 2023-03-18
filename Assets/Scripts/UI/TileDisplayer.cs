@@ -7,8 +7,6 @@ public class TileDisplayer : MonoBehaviour
 {
     public SpriteRenderer cover;
     public SpriteRenderer contents;
-    public GameObject detector;
-    public TMP_Text txtDetector;
 
     public SpriteSet spritesDetector;
     public SpriteSet spritesDetectorFill;
@@ -54,18 +52,11 @@ public class TileDisplayer : MonoBehaviour
         //Contents
         int contentCount = tile.objects.Count;
         contents.gameObject.SetActive(contentCount > 0);
-        //Detector
-        detector.gameObject.SetActive(
-            tile.hazardCount > 0 && contentCount == 0
-            );
-        detector.SetActive(tile.Revealed && tile.hazardCount > 0);
-        txtDetector.text = $"{tile.hazardCount}";
     }
 
     private void onRevealedChanged(bool revealed)
     {
         cover.gameObject.SetActive(!revealed);
-        detector.SetActive(tile.Revealed && tile.hazardCount > 0);
     }
 
     private void onFlaggedChanged(bool flagged)

@@ -5,7 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Player player;
+    public GameObject detectorPrefab;
 
+    private void Start()
+    {
+        player.onDetectorAdded += makeDetector;
+    }
 
     // Update is called once per frame
     void Update()
@@ -17,7 +22,18 @@ public class PlayerController : MonoBehaviour
         //}
 
         player.move();
-        player.tryReveal();
+        bool tileRevealed = player.tryReveal();
+        if (tileRevealed)
+        {
+            player.placeDetector(player.movePos.toVector2Int());
+        }
         transform.position = player.Position;
+    }
+
+    public void makeDetector(Detector detector)
+    {
+        GameObject goDetect = Instantiate(detectorPrefab);
+        goDetect.transform.position = (Vector2)detector.Position;
+        goDetect.GetComponent<DetectorDisplayer>().init(detector);
     }
 }
