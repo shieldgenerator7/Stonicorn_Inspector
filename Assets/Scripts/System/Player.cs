@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class Player
 {
+    /// <summary>
+    /// How fast the player can move in units per second
+    /// </summary>
     public float moveSpeed = 2;
+    /// <summary>
+    /// How far away the player can see from themselves
+    /// </summary>
     public int visionRange = 5;
+    /// <summary>
+    /// How close the player must be to reveal a tile
+    /// </summary>
     public int inspectRange = 2;
 
     public Game game;
 
 
-    public Vector2 movePos;
+    public Vector2 movePos = Vector2.zero;
 
     private Vector2 position;
     public Vector2 Position
@@ -47,6 +56,22 @@ public class Player
     }
     public delegate void OnPosReached(Vector2 pos);
     public event OnPosReached onPosReached;
+
+    public void tryReveal()
+    {
+        Tile moveTile = game.planet.map[movePos.toVector2Int()];
+        if (!moveTile)
+        {
+            return;
+        }
+        if (moveTile.CanReveal && !moveTile.Revealed)
+        {
+            if (Vector2.Distance(movePos, Position) <= inspectRange)
+            {
+                moveTile.Revealed = true;
+            }
+        }
+    }
 
     public void revealTile(Vector2Int position)
     {

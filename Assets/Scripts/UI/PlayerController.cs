@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         //}
 
         player.move();
+        player.tryReveal();
         transform.position = player.Position;
     }
 }

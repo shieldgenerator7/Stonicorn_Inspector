@@ -11,6 +11,7 @@ public class Game
     public Game(Player player = null)
     {
         this.player = player ?? new Player();
+        this.player.game = this;
     }
 
     public void startGame(PlanetGeneration planetGeneration)

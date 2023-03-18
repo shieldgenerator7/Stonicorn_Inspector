@@ -34,8 +34,6 @@ public class TileController : MonoBehaviour
             if (leftclick)
             {
                 FindObjectOfType<PlayerController>().player.movePos = transform.position;
-                FindObjectOfType<PlayerController>().player.onPosReached -= revealThis;
-                FindObjectOfType<PlayerController>().player.onPosReached += revealThis;
             }
             if (rightclick)
             {
@@ -45,17 +43,5 @@ public class TileController : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void revealThis(Vector2 pos)
-    {
-        if (pos == (Vector2)transform.position)
-        {
-            if (!tile.Flagged)
-            {
-                tile.Revealed = true;
-            }
-        }
-        FindObjectOfType<PlayerController>().player.onPosReached -= revealThis;
     }
 }
