@@ -19,4 +19,13 @@ public static class Utility
         int index = Random.Range(0, list.Count);
         return list[index];
     }
+
+    public static int DistanceInt(Vector2Int vi1, Vector2Int vi2)
+    {
+        //includes moving diagonally as one move
+        return Mathf.Max(
+            Mathf.Abs(vi1.x - vi2.x),
+            Mathf.Abs(vi1.y - vi2.y)
+            );
+    }
 }

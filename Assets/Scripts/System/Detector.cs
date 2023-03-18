@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Detector
+public class Detector : Entity
 {
     private int range;
     public int Range => range;
 
     private Vector2Int pos;
-    public Vector2Int Position => pos;
+    public Vector2Int Pos => pos;
 
     private int detectedAmount;
     public int Detected
@@ -26,9 +26,8 @@ public class Detector
 
     private Grid<Tile> map;
 
-    public Detector(Grid<Tile> map, int range = 1)
+    public Detector(Game game, int range = 1) : base(game)
     {
-        this.map = map;
         this.range = range;
     }
 
@@ -40,7 +39,11 @@ public class Detector
     public void detect(Vector2Int pos)
     {
         this.pos = pos;
-        Detected = map.getNeighbors(pos, range)
-            .Count(t => t && t.objects.Count > 0);
+        Detected = game.enemies.Count(
+            enemy => Utility.DistanceInt(
+                pos,
+                enemy.Position.toVector2Int()
+                ) <= range
+            );
     }
 }

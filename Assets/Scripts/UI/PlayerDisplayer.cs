@@ -30,7 +30,7 @@ public class PlayerDisplayer : MonoBehaviour
     public DetectorDisplayer makeDetector(Detector detector)
     {
         GameObject goDetect = Instantiate(detectorPrefab);
-        goDetect.transform.position = (Vector2)detector.Position;
+        goDetect.transform.position = (Vector2)detector.Pos;
         DetectorDisplayer detectorDisplayer = goDetect.GetComponent<DetectorDisplayer>();
         detectorDisplayer.init(detector);
         return detectorDisplayer;

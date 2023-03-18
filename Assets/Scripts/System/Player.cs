@@ -24,7 +24,7 @@ public class Player : Entity
     }
     public void init(Planet planet)
     {
-        followDetector = new Detector(planet.map, 2);
+        followDetector = new Detector(game, 2);
         followDetector.detect(Position.toVector2Int());
     }
 
@@ -63,13 +63,13 @@ public class Player : Entity
     public Detector placeDetector(Vector2Int pos, int range = 1)
     {
         //Early exit: already a detector at that pos
-        Detector existing = detectors.Find(d => d.Position == pos);
+        Detector existing = detectors.Find(d => d.Pos == pos);
         if (existing != null)
         {
             return existing;
         }
         //
-        Detector detector = new Detector(game.planet.map, range);
+        Detector detector = new Detector(game, range);
         detector.detect(pos);
         detectors.Add(detector);
         onDetectorAdded?.Invoke(detector);
