@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fca6a71eb5923e48afb459223190427, type: 3}
-  m_Name: PlanetGeneration
+  m_Name: Planet_Medium
   m_EditorClassIdentifier: 
   mapGenerators:
-  - {fileID: 11400000, guid: 1bfd39b2bdb9d9a44951371e13b667b0, type: 2}
-  - {fileID: 11400000, guid: e4c8ebf0a3673c34880643bdeb86faaa, type: 2}
+  - {fileID: 11400000, guid: 8bc70f50f6d90594c88bab18ef31d3a9, type: 2}
+  - {fileID: 11400000, guid: bff7467f20fd5194e95aae92340182df, type: 2}
