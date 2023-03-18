@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Player player;
+    public int detectorLimit = 10;
 
     private void Start()
     {
+        player.onDetectorAdded += onDetectorPlaced;
     }
 
     // Update is called once per frame
@@ -42,5 +44,13 @@ public class PlayerController : MonoBehaviour
         //Update player actions
         player.move();
         player.tryReveal();
+    }
+
+    void onDetectorPlaced(Detector detector)
+    {
+        if (player.DetectorCount > detectorLimit)
+        {
+            player.removeDetector();
+        }
     }
 }

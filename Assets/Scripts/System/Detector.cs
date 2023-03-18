@@ -46,4 +46,11 @@ public class Detector : Entity
                 ) <= range
             );
     }
+
+    public void destroy()
+    {
+        onDestroyed?.Invoke();   
+    }
+    public delegate void OnDestroyed();
+    public event OnDestroyed onDestroyed;
 }

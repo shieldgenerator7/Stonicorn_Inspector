@@ -17,6 +17,7 @@ public class Player : Entity
     private Detector followDetector;
     public Detector FollowDetector => followDetector;
     private List<Detector> detectors = new List<Detector>();
+    public int DetectorCount => detectors.Count;
 
     public Player(Game game) : base(game)
     {
@@ -77,6 +78,15 @@ public class Player : Entity
     }
     public delegate void OnDetectorEvent(Detector detectors);
     public event OnDetectorEvent onDetectorAdded;
+
+    public void removeDetector()
+    {
+        Detector detector = detectors[0];
+        detector.destroy();
+        detectors.RemoveAt(0);
+        onDetectorRemoved?.Invoke(detector);
+    }
+    public event OnDetectorEvent onDetectorRemoved;
 
     public void revealTile(Vector2Int position)
     {

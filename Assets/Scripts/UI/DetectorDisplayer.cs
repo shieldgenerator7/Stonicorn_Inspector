@@ -21,6 +21,7 @@ public class DetectorDisplayer : MonoBehaviour
         this.detector = detector;
         this.detector.onDetectedAmountChanged += updateDetection;
         updateDetection(detector.Detected);
+        this.detector.onDestroyed += () => Destroy(gameObject);
     }
 
     public Color getColor(int count)
