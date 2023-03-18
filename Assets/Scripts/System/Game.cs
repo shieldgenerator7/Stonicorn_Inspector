@@ -5,10 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class Game 
 {
-    public Planet planet = new Planet();
+    public Planet planet;
 
     public Game()
     {
-        planet = new Planet();
     }
+
+    public void startGame(PlanetGeneration planetGeneration)
+    {
+        planet = planetGeneration.generatePlanet();
+    }//
 }

@@ -10,18 +10,11 @@ public class Planet
     public Grid<Tile> map { get; private set; }
     public Vector2Int Size => map.Max - map.Min;
 
-    public Planet()
+    public Planet(Grid<Tile> map)
     {
-        map = new Grid<Tile>();
-        map.onGridChanged += (grid) => onMapChanged?.Invoke(grid);
+        this.map = map;
+        this.map.onGridChanged += (grid) => onMapChanged?.Invoke(grid);
     }
-
-    public void generate(MapGenerator mapGenerator)
-    {
-        mapGenerator.generate(map);
-        onMapChanged?.Invoke(map);
-    }
-
     public delegate void OnMapChanged(Grid<Tile> map);
     public event OnMapChanged onMapChanged;
 }

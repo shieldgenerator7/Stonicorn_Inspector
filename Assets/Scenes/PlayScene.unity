@@ -270,9 +270,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetDisplayer: {fileID: 445616200}
-  mapGenerators:
-  - {fileID: 11400000, guid: 1bfd39b2bdb9d9a44951371e13b667b0, type: 2}
-  - {fileID: 11400000, guid: e4c8ebf0a3673c34880643bdeb86faaa, type: 2}
+  planetGenerationList:
+  - {fileID: 11400000, guid: cbd2457dc5a5acb44bce91514cc499e1, type: 2}
 --- !u!4 &1121731233
 Transform:
   m_ObjectHideFlags: 0

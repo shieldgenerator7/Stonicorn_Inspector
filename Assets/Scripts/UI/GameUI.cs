@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class GameUI : MonoBehaviour
 {
     public PlanetDisplayer planetDisplayer;
-    public List<MapGenerator> mapGenerators;
+    public List<PlanetGeneration> planetGenerationList;
 
     [SerializeField]
     private Game game;
@@ -15,9 +14,7 @@ public class GameUI : MonoBehaviour
     void Start()
     {
         game = new Game();
+        game.startGame(planetGenerationList.randomItem());
         planetDisplayer.init(game.planet);
-        mapGenerators.ForEach(mapGenerator => 
-            game.planet.generate(mapGenerator)
-        );
     }
 }

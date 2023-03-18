@@ -14,6 +14,7 @@ public class PlanetDisplayer : MonoBehaviour
     {
         this.planet = planet;
         planet.onMapChanged += generateDisplay;
+        generateDisplay(planet.map);
     }
 
     private void generateDisplay(Grid<Tile> map)
