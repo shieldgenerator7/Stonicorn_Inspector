@@ -23,6 +23,11 @@ public class DetectorDisplayer : MonoBehaviour
         updateDetection(detector.Detected);
     }
 
+    public Color getColor(int count)
+    {
+        return colors[Mathf.Clamp(count, 0, colors.Count - 1)];
+    }
+
     void updateDetection(int count)
     {
         //Visible
@@ -32,7 +37,7 @@ public class DetectorDisplayer : MonoBehaviour
             .Any(tile => tile)
             );
         //Color
-        Color color = colors[Mathf.Clamp(count, 0, colors.Count - 1)];
+        Color color = getColor(count);
         imgDetector.color = color;
         txtDetector.color = color;
         //Text

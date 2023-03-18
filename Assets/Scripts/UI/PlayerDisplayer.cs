@@ -9,6 +9,7 @@ public class PlayerDisplayer : MonoBehaviour
     public GameObject detectorPrefab;
 
     public DetectorDisplayer followDetectorDisplayer;
+    public SpriteRenderer scanSquare;
 
     // Start is called before the first frame update
     public void init(Player player)
@@ -25,6 +26,12 @@ public class PlayerDisplayer : MonoBehaviour
         //Update display
         Vector2 pos = player.Position;
         transform.position = pos;
+        //Scan Square
+        scanSquare.transform.position = (Vector2)player.FollowDetector.Pos;
+        Color color = followDetectorDisplayer.getColor(player.FollowDetector.Detected);
+        color.a = scanSquare.color.a;
+        scanSquare.color = color;
+        scanSquare.enabled = followDetectorDisplayer.goDetector.activeSelf;
     }
 
     public DetectorDisplayer makeDetector(Detector detector)
