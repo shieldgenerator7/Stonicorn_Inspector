@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DetectorDisplayer : MonoBehaviour
 {
     Detector detector;
 
-    public GameObject goDetector;
+    public List<Color> colors;
+
+    public Image imgDetector;
     public TMP_Text txtDetector;
 
     // Start is called before the first frame update
@@ -20,7 +23,11 @@ public class DetectorDisplayer : MonoBehaviour
 
     void updateDetection(int count)
     {
-        goDetector.SetActive(count > 0);
+        //Color
+        Color color = colors[Mathf.Clamp(count, 0, colors.Count - 1)];
+        imgDetector.color = color;
+        txtDetector.color = color;
+        //Text
         txtDetector.text = $"{count}";
     }
 
