@@ -34,7 +34,7 @@ public class Game
         //Position player
         Vector2Int min = planet.map.Min;
         Vector2Int max = planet.map.Max;
-        Vector2 startPos = new Vector2((min.x + max.x) / 2, max.y + 2);
+        Vector2 startPos = new Vector2((min.x + max.x) / 2, max.y + 3);
         player.Position = startPos;
         player.movePos = player.Position;
         //Init player

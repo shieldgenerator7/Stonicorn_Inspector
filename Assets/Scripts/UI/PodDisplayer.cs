@@ -37,7 +37,7 @@ public class PodDisplayer : MonoBehaviour
                     );
                 player.moveSpeed = 0;
                 FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
-                    enemyDisplayer => Destroy(enemyDisplayer)
+                    detectorDisplayer => Destroy(detectorDisplayer.gameObject)
                     );
 
             }
