@@ -15,24 +15,29 @@ public class Enemy : Entity
     }
     public void init(Vector2Int pos)
     {
-        hidingTile = game.planet.map[pos];
-        currentTile = hidingTile;
         onPositionChanged += (pos) =>
         {
             Tile newTile = game.planet.map[pos.toVector2Int()];
             if (currentTile != newTile)
             {
                 //detach from old tile
-                currentTile.onFlaggedChanged -= onFlaggedChanged;
+                if (currentTile)
+                {
+                    currentTile.onFlaggedChanged -= onFlaggedChanged;
+                }
                 //attach to new tile
                 currentTile = newTile;
-                currentTile.onFlaggedChanged += onFlaggedChanged;
+                if (currentTile)
+                {
+                    currentTile.onFlaggedChanged += onFlaggedChanged;
+                }
             }
         };
         Position = pos;
         MovePosition = pos;
+        hidingTile = game.planet.map[pos];
         found = hidingTile.Revealed;
-        hidingTile.onRevealedChanged += OnFound;        
+        hidingTile.onRevealedChanged += OnFound;
     }
 
     void onFlaggedChanged(bool flagged)
