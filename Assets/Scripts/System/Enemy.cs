@@ -5,7 +5,9 @@ using UnityEngine;
 public class Enemy : Entity
 {
     private bool found = false;
+    private bool flagged = false;
     private Tile hidingTile;
+    private Tile currentTile = null;
 
     public Enemy(Game game) : base(game)
     {
@@ -13,11 +15,33 @@ public class Enemy : Entity
     }
     public void init(Vector2Int pos)
     {
+        hidingTile = game.planet.map[pos];
+        currentTile = hidingTile;
+        onPositionChanged += (pos) =>
+        {
+            Tile newTile = game.planet.map[pos.toVector2Int()];
+            if (currentTile != newTile)
+            {
+                //detach from old tile
+                currentTile.onFlaggedChanged -= onFlaggedChanged;
+                //attach to new tile
+                currentTile = newTile;
+                currentTile.onFlaggedChanged += onFlaggedChanged;
+            }
+        };
         Position = pos;
         MovePosition = pos;
-        hidingTile = game.planet.map[pos];
         found = hidingTile.Revealed;
-        hidingTile.onRevealedChanged += OnFound;
+        hidingTile.onRevealedChanged += OnFound;        
+    }
+
+    void onFlaggedChanged(bool flagged)
+    {
+        this.flagged = flagged;
+        if (flagged)
+        {
+            MovePosition = Position;
+        }
     }
 
     void OnFound(bool found)
@@ -32,7 +56,10 @@ public class Enemy : Entity
     {
         if (found)
         {
-            MovePosition = game.player.Position;
+            if (!flagged)
+            {
+                MovePosition = game.player.Position;
+            }
             move();
         }
     }
