@@ -39,7 +39,7 @@ public class Tile
 
     public bool CanReveal => !Flagged;
 
-    public bool CanFlag => !Revealed;
+    public bool CanFlag => true;
 
     public static implicit operator bool(Tile tile) => tile != null;
     public override string ToString() => $"Tile ({position.x}, {position.y})";

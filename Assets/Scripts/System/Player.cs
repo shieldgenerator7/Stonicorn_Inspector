@@ -14,6 +14,13 @@ public class Player : Entity
     /// </summary>
     public int inspectRange = 2;
 
+    public enum Task
+    {
+        REVEAL,
+        FLAG,
+    }
+    public Task task = Task.REVEAL;
+
     private Detector followDetector;
     public Detector FollowDetector => followDetector;
     private List<Detector> detectors = new List<Detector>();
@@ -32,7 +39,16 @@ public class Player : Entity
     public override void process()
     {
         move();
-        tryReveal();
+        switch (task)
+        {
+            case Task.REVEAL:
+                tryReveal();
+                break;
+            case Task.FLAG:
+                tryFlag();
+                break;
+            default: throw new UnityException($"Unknown task enum value: {task}");
+        }
         autoPlaceDetectors();
     }
 
@@ -70,6 +86,37 @@ public class Player : Entity
     }
     public delegate void TileDelegate(Tile tile, bool state);
     public event TileDelegate OnTileRevealed;
+
+    /// <summary>
+    /// Flags or unflags the destination tile if it can
+    /// </summary>
+    /// <returns>
+    /// true if it flagged or unflagged the tile
+    /// false if the tile is null or out of range
+    /// </returns>
+    public bool tryFlag()
+    {
+        if (Utility.DistanceInt(MovePosition.toVector2Int(), Position.toVector2Int()) <= inspectRange)
+        {
+            Tile moveTile = game.planet.map[MovePosition.toVector2Int()];
+            if (!moveTile)
+            {
+                return false;
+            }
+            if (moveTile.CanFlag)
+            {
+                moveTile.Flagged = !moveTile.Flagged;
+                OnTileFlagged?.Invoke(moveTile, moveTile.Flagged);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+    public event TileDelegate OnTileFlagged;
 
     public void autoPlaceDetectors()
     {

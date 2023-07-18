@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
             player.MovePosition = player.Position;
             player.autoPlaceDetectors();
         };
+        //Stop the player whenever they flag a tile
+        player.OnTileFlagged += (tile, state) => player.MovePosition = player.Position;
     }
 
     // Update is called once per frame
@@ -29,12 +31,13 @@ public class PlayerController : MonoBehaviour
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             overlapTile = player.game.planet.map[mousePos.toVector2Int()];
         }
+        Vector2Int mousePosInt = mousePos.toVector2Int();
+        bool mouseInRange = Utility.DistanceInt(player.Position.toVector2Int(), mousePosInt) <= player.inspectRange;
         if (leftclick)
         {
-            Vector2Int mousePosInt = mousePos.toVector2Int();
             //Reveal tile without moving
             Tile tile = player.game.planet.map[mousePosInt];
-            if (!(tile?.Revealed ?? true) && Utility.DistanceInt(player.Position.toVector2Int(), mousePosInt) <= player.inspectRange)
+            if (!(tile?.Revealed ?? true) && mouseInRange)
             {
                 if (!tile.Flagged)
                 {
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour
             //Move to position
             else
             {
+                player.task = Player.Task.REVEAL;
                 player.MovePosition = mousePosInt;
             }
         }
@@ -51,7 +55,15 @@ public class PlayerController : MonoBehaviour
         {
             if (overlapTile)
             {
-                overlapTile.Flagged = !overlapTile.Flagged;
+                if (mouseInRange)
+                {
+                    overlapTile.Flagged = !overlapTile.Flagged;
+                }
+                else
+                {
+                    player.task = Player.Task.FLAG;
+                    player.MovePosition = mousePosInt;
+                }
             }
         }
 
