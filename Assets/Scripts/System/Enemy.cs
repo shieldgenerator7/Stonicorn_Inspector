@@ -54,7 +54,13 @@ public class Enemy : Entity
         this.found = found;
         hidingTile.onRevealedChanged -= OnFound;
         hidingTile = null;
-        onPosReached += (pos) => game.player.moveSpeed = 0;
+        onPosReached += (pos) =>
+        {
+            if (pos == game.player.Position)
+            {
+                game.player.moveSpeed = 0;
+            }
+        };
     }
 
     public override void process()
