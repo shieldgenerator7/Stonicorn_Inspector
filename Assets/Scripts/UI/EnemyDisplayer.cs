@@ -10,12 +10,11 @@ public class EnemyDisplayer : MonoBehaviour
     public void init(Enemy enemy)
     {
         this.enemy = enemy;
+        enemy.onPositionChanged += updatePosition;
     }
 
-    // Update is called once per frame
-    void Update()
+    void updatePosition(Vector2 pos)
     {
-        enemy.process();
-        transform.position = enemy.Position;
+        transform.position = pos;
     }
 }

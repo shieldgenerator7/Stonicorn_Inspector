@@ -41,10 +41,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //Update player actions
-        player.move();
-        player.tryReveal();
-
         //Check to close game
         if (Input.GetKeyUp(KeyCode.Escape) && !Input.GetKey(KeyCode.Space))
         {
