@@ -45,7 +45,7 @@ public class Player : Entity
     /// </returns>
     public bool tryReveal()
     {
-        if (Vector2.Distance(MovePosition, Position) <= inspectRange)
+        if (Utility.DistanceInt(MovePosition.toVector2Int(), Position.toVector2Int()) <= inspectRange)
         {
             Tile moveTile = game.planet.map[MovePosition.toVector2Int()];
             if (!moveTile)
@@ -137,6 +137,7 @@ public class Player : Entity
         if (tile)
         {
             tile.Revealed = true;
+            OnTileRevealed?.Invoke(tile, true);
         }
     }
 

@@ -27,7 +27,18 @@ public class PlayerController : MonoBehaviour
         }
         if (leftclick)
         {
-            player.MovePosition = mousePos.toVector2Int();
+            Vector2Int mousePosInt = mousePos.toVector2Int();
+            //Reveal tile without moving
+            Tile tile = player.game.planet.map[mousePosInt];
+            if (!(tile?.Revealed ?? true) && Utility.DistanceInt(player.Position.toVector2Int(), mousePosInt) <= player.inspectRange)
+            {
+                player.revealTile(mousePosInt);
+            }
+            //Move to position
+            else
+            {
+                player.MovePosition = mousePosInt;
+            }
         }
         if (rightclick)
         {
