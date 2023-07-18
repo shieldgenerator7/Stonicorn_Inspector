@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
                 {
                     player.revealTile(mousePosInt);
                     stopTask();
+                    startTickingTimer();
                 }
             }
             //Move to position
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
                 {
                     overlapTile.Flagged = !overlapTile.Flagged;
                     stopTask();
+                    startTickingTimer();
                 }
                 else
                 {
@@ -71,10 +73,26 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //Ticking
+        if (timeEnd > 0)
+        {
+            if (Time.time >= timeEnd)
+            {
+                startTickingTimer(false);
+            }
+        }
+
         //Check to close game
         if (Input.GetKeyUp(KeyCode.Escape) && !Input.GetKey(KeyCode.Space))
         {
             Application.Quit();
         }
+    }
+
+    float timeEnd = 0;
+    void startTickingTimer(bool start = true, float duration = 0.5f)
+    {
+        timeEnd = (start) ? Time.time + duration : 0;
+        player.game.Ticking = start;
     }
 }
