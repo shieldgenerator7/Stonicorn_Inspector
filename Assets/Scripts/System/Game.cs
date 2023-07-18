@@ -10,9 +10,24 @@ public class Game
     public Player player;
     public List<Enemy> enemies = new List<Enemy>();
 
+    private bool ticking = false;//whether or not time is progressing forward
+    public bool Ticking
+    {
+        get => ticking;
+        set
+        {
+            ticking = value;
+            onTickingChanged?.Invoke(ticking);
+        }
+    }
+    public delegate void OnTickingChanged(bool ticking);
+    public event OnTickingChanged onTickingChanged;
+
     public Game(Player player = null)
     {
         this.player = player ?? new Player(this);
+        this.player.onMovePositionChanged += (pos) => Ticking = true;
+        this.player.onPosReached += (pos) => Ticking = false;
     }
 
     public void startGame(PlanetGeneration planetGeneration)
@@ -39,5 +54,11 @@ public class Game
         player.MovePosition = player.Position;
         //Init player
         player.init(planet);
+    }
+
+    public void process()
+    {
+        player.process();
+        enemies.ForEach(enemy => enemy.process());
     }
 }
