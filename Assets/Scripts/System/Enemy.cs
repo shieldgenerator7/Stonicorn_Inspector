@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : Entity
 {
     private bool found = false;
-    private bool flagged = false;
+    private bool trapped = false;
     private Tile hidingTile;
     private Tile currentTile = null;
 
@@ -42,7 +42,7 @@ public class Enemy : Entity
 
     void onFlaggedChanged(bool flagged)
     {
-        this.flagged = flagged;
+        this.trapped = flagged;
         if (flagged)
         {
             MovePosition = Position;
@@ -67,9 +67,15 @@ public class Enemy : Entity
     {
         if (found)
         {
-            if (!flagged)
+            //Move towards player
+            if (!trapped)
             {
                 MovePosition = game.player.Position;
+            }
+            //Move as close to player as possible while trapped
+            else
+            {
+                MovePosition = (game.player.Position - Position).normalized * 0.3f + currentTile.position;
             }
             move();
         }
