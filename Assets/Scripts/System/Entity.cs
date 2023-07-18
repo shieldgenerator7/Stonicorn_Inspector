@@ -54,17 +54,17 @@ public class Entity
 
     public void move()
     {
-        if (Position != movePos)
+        if (position != movePos)
         {
-            Vector2 dir = (movePos - Position).normalized;
+            Vector2 dir = (movePos - position).normalized;
             Position += dir * Mathf.Min(
                 moveSpeed * Time.deltaTime,
-                Vector2.Distance(Position, movePos)
+                Vector2.Distance(position, movePos)
                 );
-            if (Mathf.Approximately(Vector2.Distance(Position, movePos), 0))
+            if (Mathf.Approximately(Vector2.Distance(position, movePos), 0))
             {
                 Position = movePos;
-                onPosReached?.Invoke(Position);
+                onPosReached?.Invoke(position);
             }
         }
     }
