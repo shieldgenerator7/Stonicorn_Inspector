@@ -14,7 +14,8 @@ public class Entity
     public delegate void OnPositionChanged(Vector2 position);
 
     private Vector2 movePos = Vector2.zero;
-    public Vector2 MovePosition {
+    public Vector2 MovePosition
+    {
         get => movePos;
         set
         {
@@ -73,6 +74,7 @@ public class Entity
 
     public void stop()
     {
-        MovePosition = position.toVector2Int();
+        //make it stop in the center of a tile, but don't make it go backwards
+        MovePosition = ((movePos - position).resize(0.49f) + position).toVector2Int();
     }
 }

@@ -14,6 +14,11 @@ public static class Utility
         return new Vector2Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.y));
     }
 
+    public static Vector2 resize(this Vector2 v, float distance)
+    {
+        return v.normalized * distance;
+    }
+
     public static T randomItem<T>(this List<T> list)
     {
         int index = Random.Range(0, list.Count);
