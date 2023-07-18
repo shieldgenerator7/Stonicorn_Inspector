@@ -16,10 +16,11 @@ public class Player : Entity
 
     public enum Task
     {
+        NONE,
         REVEAL,
         FLAG,
     }
-    public Task task = Task.REVEAL;
+    public Task task = Task.NONE;
 
     private Detector followDetector;
     public Detector FollowDetector => followDetector;
@@ -47,6 +48,7 @@ public class Player : Entity
             case Task.FLAG:
                 tryFlag();
                 break;
+            case Task.NONE: break;
             default: throw new UnityException($"Unknown task enum value: {task}");
         }
         autoPlaceDetectors();

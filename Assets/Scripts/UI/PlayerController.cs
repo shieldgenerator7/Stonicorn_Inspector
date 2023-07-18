@@ -11,11 +11,16 @@ public class PlayerController : MonoBehaviour
         //Stop the player whenever they reveal a tile
         player.OnTileRevealed += (tile, state) =>
         {
+            player.task = Player.Task.NONE;
             player.stop();
             player.autoPlaceDetectors();
         };
         //Stop the player whenever they flag a tile
-        player.OnTileFlagged += (tile, state) => player.stop();
+        player.OnTileFlagged += (tile, state) =>
+        {
+            player.task = Player.Task.NONE;
+            player.stop();
+        };
     }
 
     // Update is called once per frame
