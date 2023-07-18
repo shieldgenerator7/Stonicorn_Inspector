@@ -36,7 +36,10 @@ public class PlayerController : MonoBehaviour
             Tile tile = player.game.planet.map[mousePosInt];
             if (!(tile?.Revealed ?? true) && Utility.DistanceInt(player.Position.toVector2Int(), mousePosInt) <= player.inspectRange)
             {
-                player.revealTile(mousePosInt);
+                if (!tile.Flagged)
+                {
+                    player.revealTile(mousePosInt);
+                }
             }
             //Move to position
             else
