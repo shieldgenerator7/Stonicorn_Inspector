@@ -33,6 +33,7 @@ public class Player : Entity
     {
         move();
         tryReveal();
+        autoPlaceDetectors();
     }
 
     /// <summary>
@@ -67,6 +68,33 @@ public class Player : Entity
         return false;
     }
 
+    public void autoPlaceDetectors()
+    {
+        //remove old detectors
+        for (int i = detectors.Count - 1; i >= 0; i--)
+        {
+            removeDetector(i);
+        }
+        //add detectors on all squares in range
+        for (int i = (int)Position.x - 2; i <= Position.x + 2; i++)
+        {
+            for (int j = (int)Position.y - 2; j <= Position.y + 2; j++)
+            {
+                placeDetector(new Vector2Int(i, j));
+            }
+        }
+        //remove detectors that aren't detecting anything
+        for (int i = detectors.Count - 1; i >= 0; i--)
+        {
+            Detector detector = detectors[i];
+            detector.detect();
+            if (detector.Detected == 0)
+            {
+                removeDetector(i);
+            }
+        }
+    }
+
     public Detector placeDetector(Vector2Int pos, int range = 1)
     {
         //Early exit: already a detector at that pos
@@ -85,11 +113,18 @@ public class Player : Entity
     public delegate void OnDetectorEvent(Detector detectors);
     public event OnDetectorEvent onDetectorAdded;
 
-    public void removeDetector()
+    public void removeDetector(int index = 0)
     {
-        Detector detector = detectors[0];
+        Detector detector = detectors[index];
         detector.destroy();
-        detectors.RemoveAt(0);
+        detectors.RemoveAt(index);
+        onDetectorRemoved?.Invoke(detector);
+    }
+    public void removeDetector(Vector2 pos)
+    {
+        Detector detector = detectors.Find(detector => detector.Pos == pos);
+        detector.destroy();
+        detectors.Remove(detector);
         onDetectorRemoved?.Invoke(detector);
     }
     public event OnDetectorEvent onDetectorRemoved;
