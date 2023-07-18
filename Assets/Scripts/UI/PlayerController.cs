@@ -5,11 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Player player;
-    public int detectorLimit = 10;
 
     private void Start()
     {
-        player.onDetectorAdded += onDetectorPlaced;
     }
 
     // Update is called once per frame
@@ -33,7 +31,6 @@ public class PlayerController : MonoBehaviour
         {
             if (!overlapTile || overlapTile.Revealed)
             {
-                player.placeDetector(mousePos.toVector2Int());
             }
             if (overlapTile && !overlapTile.Revealed)
             {
@@ -45,14 +42,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape) && !Input.GetKey(KeyCode.Space))
         {
             Application.Quit();
-        }
-    }
-
-    void onDetectorPlaced(Detector detector)
-    {
-        if (player.DetectorCount > detectorLimit)
-        {
-            player.removeDetector();
         }
     }
 }
