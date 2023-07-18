@@ -61,6 +61,16 @@ public class Grid<T> where T : class
         return neighbors;
     }
 
+    public int getNeighborCount(Vector2Int v, int range = 1, Func<T, bool> filter = null)
+    {
+        List<T> neighbors = getNeighbors(v, range);
+        if (filter != null)
+        {
+            return neighbors.Count(filter);
+        }
+        return neighbors.Count;
+    }
+
     public List<T> FindAll(Func<T, bool> filter)
         => grid.Values.ToList().FindAll((val) => filter(val)).ToList();
 
