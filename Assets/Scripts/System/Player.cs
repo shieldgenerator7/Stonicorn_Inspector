@@ -79,9 +79,10 @@ public class Player : Entity
             removeDetector(i);
         }
         //add detectors on all squares in range
-        for (int i = (int)Position.x - 2; i <= Position.x + 2; i++)
+        Vector2Int posInt = Position.toVector2Int();
+        for (int i = posInt.x - 2; i <= posInt.x + 2; i++)
         {
-            for (int j = (int)Position.y - 2; j <= Position.y + 2; j++)
+            for (int j = posInt.y - 2; j <= posInt.y + 2; j++)
             {
                 Vector2Int pos = new Vector2Int(i, j);
                 Tile tile = game.planet.map[pos];
