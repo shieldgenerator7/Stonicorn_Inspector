@@ -70,4 +70,9 @@ public class Entity
     }
     public delegate void OnPosReached(Vector2 pos);
     public event OnPosReached onPosReached;
+
+    public void stop()
+    {
+        MovePosition = position.toVector2Int();
+    }
 }
