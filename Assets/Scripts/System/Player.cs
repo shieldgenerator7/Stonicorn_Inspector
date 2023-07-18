@@ -38,9 +38,9 @@ public class Player : Entity
     /// </returns>
     public bool tryReveal()
     {
-        if (Vector2.Distance(movePos, Position) <= inspectRange)
+        if (Vector2.Distance(MovePosition, Position) <= inspectRange)
         {
-            Tile moveTile = game.planet.map[movePos.toVector2Int()];
+            Tile moveTile = game.planet.map[MovePosition.toVector2Int()];
             if (!moveTile)
             {
                 return true;

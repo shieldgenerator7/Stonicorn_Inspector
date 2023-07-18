@@ -14,7 +14,7 @@ public class Enemy : Entity
     public void init(Vector2Int pos)
     {
         Position = pos;
-        movePos = pos;
+        MovePosition = pos;
         hidingTile = game.planet.map[pos];
         found = hidingTile.Revealed;
         hidingTile.onRevealedChanged += OnFound;
@@ -32,7 +32,7 @@ public class Enemy : Entity
     {
         if (found)
         {
-            movePos = game.player.Position;
+            MovePosition = game.player.Position;
             move();
         }
     }

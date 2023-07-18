@@ -11,7 +11,18 @@ public class Entity
     /// </summary>
     public float moveSpeed = 2;
 
-    public Vector2 movePos = Vector2.zero;
+    public delegate void OnPositionChanged(Vector2 position);
+
+    private Vector2 movePos = Vector2.zero;
+    public Vector2 MovePosition {
+        get => movePos;
+        set
+        {
+            movePos = value;
+            onMovePositionChanged?.Invoke(movePos);
+        }
+    }
+    public event OnPositionChanged onMovePositionChanged;
 
     private Vector2 position;
     public Vector2 Position
@@ -24,7 +35,6 @@ public class Entity
             onPositionChanged?.Invoke(position);
         }
     }
-    public delegate void OnPositionChanged(Vector2 position);
     public event OnPositionChanged onPositionChanged;
     private Vector2Int gridPos;
 

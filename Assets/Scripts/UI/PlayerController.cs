@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         }
         if (leftclick)
         {
-            player.movePos = mousePos.toVector2Int();
+            player.MovePosition = mousePos.toVector2Int();
         }
         if (rightclick)
         {
