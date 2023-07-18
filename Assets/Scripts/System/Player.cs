@@ -80,17 +80,15 @@ public class Player : Entity
         {
             for (int j = (int)Position.y - 2; j <= Position.y + 2; j++)
             {
-                placeDetector(new Vector2Int(i, j));
-            }
-        }
-        //remove detectors that aren't detecting anything
-        for (int i = detectors.Count - 1; i >= 0; i--)
-        {
-            Detector detector = detectors[i];
-            detector.detect();
-            if (detector.Detected == 0)
-            {
-                removeDetector(i);
+                Vector2Int pos = new Vector2Int(i, j);
+                Tile tile = game.planet.map[pos];
+                int hiddenNeighborCount = game.planet.map.getNeighborCount(
+                    pos, 1, (t => t && !t.Revealed)
+                    );
+                if ((!tile || tile.Revealed) && hiddenNeighborCount > 0)
+                {
+                    placeDetector(pos);
+                }
             }
         }
     }
