@@ -32,11 +32,7 @@ public class DetectorDisplayer : MonoBehaviour
     void updateDetection(int count)
     {
         //Visible
-        goDetector.SetActive(count > 0 ||
-            detector.game.planet.map
-            .getNeighbors(detector.Pos, detector.Range)
-            .Any(tile => tile)
-            );
+        goDetector.SetActive(count > 0 || detector.game.player.DetectorCount > 0);
         //Color
         Color color = getColor(count);
         imgDetector.color = color;
