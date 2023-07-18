@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
         player.OnTileFlagged += stopTask;
     }
 
-    void stopTask(Tile tile, bool state)
+    void stopTask(Tile tile = null, bool state = false)
     {
         player.task = Player.Task.NONE;
         player.stop();
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
                 if (!tile.Flagged)
                 {
                     player.revealTile(mousePosInt);
+                    stopTask();
                 }
             }
             //Move to position
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
                 if (mouseInRange)
                 {
                     overlapTile.Flagged = !overlapTile.Flagged;
+                    stopTask();
                 }
                 else
                 {
