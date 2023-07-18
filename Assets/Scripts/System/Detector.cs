@@ -39,11 +39,13 @@ public class Detector : Entity
     public void detect(Vector2Int pos)
     {
         this.pos = pos;
+        Grid<Tile> map = game.planet.map;
         Detected = game.enemies.Count(
             enemy => Utility.DistanceInt(
                 pos,
                 enemy.Position.toVector2Int()
-                ) <= range
+                ) <= range 
+                && !(map[enemy.Position.toVector2Int()]?.Flagged ?? false)
             );
     }
 
