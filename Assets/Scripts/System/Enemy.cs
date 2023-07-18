@@ -11,7 +11,7 @@ public class Enemy : Entity
 
     public Enemy(Game game) : base(game)
     {
-        moveSpeed = game.player.moveSpeed / 4;
+        moveSpeed = game.player.moveSpeed / 2;
     }
     public void init(Vector2Int pos)
     {
