@@ -20,6 +20,10 @@ public class Entity
         {
             movePos = value;
             onMovePositionChanged?.Invoke(movePos);
+            if (movePos == position)
+            {
+                onPosReached?.Invoke(position);
+            }
         }
     }
     public event OnPositionChanged onMovePositionChanged;
