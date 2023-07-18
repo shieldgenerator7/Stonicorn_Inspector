@@ -46,10 +46,7 @@ public class PlayerController : MonoBehaviour
         }
         if (rightclick)
         {
-            if (!overlapTile || overlapTile.Revealed)
-            {
-            }
-            if (overlapTile && !overlapTile.Revealed)
+            if (overlapTile)
             {
                 overlapTile.Flagged = !overlapTile.Flagged;
             }
