@@ -57,6 +57,7 @@ public class Player : Entity
                 if (!moveTile.Revealed)
                 {
                     moveTile.Revealed = true;
+                    OnTileRevealed?.Invoke(moveTile, true);
                 }
                 return true;
             }
@@ -67,6 +68,8 @@ public class Player : Entity
         }
         return false;
     }
+    public delegate void TileDelegate(Tile tile, bool state);
+    public event TileDelegate OnTileRevealed;
 
     public void autoPlaceDetectors()
     {

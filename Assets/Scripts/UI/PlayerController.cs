@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        //Stop the player whenever they reveal a tile
+        player.OnTileRevealed += (tile, state) => player.MovePosition = player.Position.toVector2Int();
     }
 
     // Update is called once per frame
