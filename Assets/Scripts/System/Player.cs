@@ -29,6 +29,12 @@ public class Player : Entity
         followDetector.detect(Position.toVector2Int());
     }
 
+    public override void process()
+    {
+        move();
+        tryReveal();
+    }
+
     /// <summary>
     /// Reveals the destination tile if it can
     /// </summary>

@@ -43,6 +43,11 @@ public class Entity
         this.game = game;
     }
 
+    public virtual void process()
+    {
+        move();
+    }
+
     public void move()
     {
         if (Position != movePos)

@@ -28,7 +28,7 @@ public class Enemy : Entity
         onPosReached += (pos) => game.player.moveSpeed = 0;
     }
 
-    public void process()
+    public override void process()
     {
         if (found)
         {
