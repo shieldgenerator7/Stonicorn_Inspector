@@ -63,23 +63,6 @@ public class PlayerController : MonoBehaviour
                 player.MovePosition = mousePosInt;
             }
         }
-        if (rightclick)
-        {
-            if (overlapTile)
-            {
-                if (mouseInRange)
-                {
-                    overlapTile.Flagged = !overlapTile.Flagged;
-                    stopTask();
-                    startTickingTimer();
-                }
-                else
-                {
-                    player.task = Player.Task.FLAG;
-                    player.MovePosition = mousePosInt;
-                }
-            }
-        }
 
         //Ticking
         if (timeEnd > 0)
