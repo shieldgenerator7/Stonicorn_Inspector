@@ -256,8 +256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startPos: {x: 0, y: 21}
-  endPos: {x: 0, y: 11}
+  startPos: {x: 0, y: 11}
+  endPos: {x: 0, y: 7}
   targetPos: {x: 0, y: 0}
 --- !u!1 &1121731231
 GameObject:
