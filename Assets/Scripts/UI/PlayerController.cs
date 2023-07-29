@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,13 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        if (player == null)
+        {
+            player = FindObjectOfType<GameUI>().Game.player;
+        }
+        //Autoflag
+        player.onPositionChanged += (pos) => tryAutoFlag(pos.toVector2Int(), 2);
+        player.OnTileRevealed += (tile, state) => tryAutoFlag(player.Position.toVector2Int(), 2);
         //Stop the player whenever they reveal or flag a tile
         player.OnTileRevealed += stopTask;
         player.OnTileFlagged += stopTask;
@@ -86,6 +94,37 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape) && !Input.GetKey(KeyCode.Space))
         {
             Application.Quit();
+        }
+    }
+
+    public void tryAutoFlag(Vector2Int pos, int range)
+    {
+        for (int i = pos.x - range; i <= pos.x + range; i++)
+        {
+            for (int j = pos.y - range; j <= pos.y + range; j++)
+            {
+                tryAutoFlag(new Vector2Int(i, j));
+            }
+        }
+    }
+
+    public void tryAutoFlag(Vector2Int pos)
+    {
+        List<Tile> neighbors = player.game.planet.map.getNeighbors(pos);
+        List<Tile> hiddenHazardNeigbors = neighbors.FindAll(nghbr => nghbr &&
+            !nghbr.Revealed &&
+            player.game.enemies.Any(enemy => enemy.Position == nghbr.position)
+            );
+        int hiddenHazardCount = hiddenHazardNeigbors.Count;
+        int hiddenSafeCount = neighbors.Count(nghbr => nghbr &&
+            !nghbr.Revealed &&
+            !player.game.enemies.Any(enemy => enemy.Position == nghbr.position));
+        bool canAutoFlag = hiddenHazardCount > 0 && hiddenSafeCount == 0
+            && hiddenHazardNeigbors.Any(nghbr => !nghbr.Flagged);
+        //autoflag
+        if (canAutoFlag)
+        {
+            hiddenHazardNeigbors.ForEach(nghbr => nghbr.Flagged = true);
         }
     }
 
