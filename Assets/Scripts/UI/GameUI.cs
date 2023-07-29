@@ -64,6 +64,15 @@ public class GameUI : MonoBehaviour
             FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
                 detectorDisplayer => Destroy(detectorDisplayer.gameObject)
                 );
+                allInspected.SetActive(false);
+        pc.player.OnTileRevealed += (tile, state) =>
+        {
+            bool allTilesRevealed = game.planet.map.All(tile => tile.Revealed || tile.Flagged);
+            if (allTilesRevealed)
+            {
+                allInspected.SetActive(true);
+            }
+        };
         };
     }
 
