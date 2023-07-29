@@ -23,15 +23,7 @@ public class PodDisplayer : MonoBehaviour
         //If player returned to startpos
         if (player.Position == startpos)
         {
-            bool anySafeUnrevealed = game.planet.map.Any(
-                tile => !tile.Revealed && !game.enemies.Any(
-                    enemy => enemy.Position == tile.position
-                    )
-                );
-            if (!anySafeUnrevealed)
-            {
-                onPlayerFinished?.Invoke();
-            }
+            onPlayerFinished?.Invoke();
         }
     }
     public delegate void OnPlayerFinished();

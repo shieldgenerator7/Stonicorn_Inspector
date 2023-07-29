@@ -8,6 +8,7 @@ public class GameUI : MonoBehaviour
 {
     public PlanetDisplayer planetDisplayer;
     public List<PlanetGeneration> planetGenerationList;
+    public GameObject allInspected;
 
     public GameObject enemyPrefab;//TODO: move this process elsewhere
 
@@ -53,18 +54,21 @@ public class GameUI : MonoBehaviour
                 {
                     SceneManager.LoadScene(0);
                 };
-            }
-            FindObjectOfType<PlayerDisplayer>().enabled = false;
-            pc.transform.parent = sc.transform;
-            //Win the game
-            FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
-                enemyDisplayer => Destroy(enemyDisplayer)
-                );
-            game.player.moveSpeed = 0;
-            FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
-                detectorDisplayer => Destroy(detectorDisplayer.gameObject)
-                );
+
+                FindObjectOfType<PlayerDisplayer>().enabled = false;
+                pc.transform.parent = sc.transform;
+                //Win the game
+                FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
+                    enemyDisplayer => Destroy(enemyDisplayer)
+                    );
+                game.player.moveSpeed = 0;
+                FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
+                    detectorDisplayer => Destroy(detectorDisplayer.gameObject)
+                    );
+
                 allInspected.SetActive(false);
+            }
+        };
         pc.player.OnTileRevealed += (tile, state) =>
         {
             bool allTilesRevealed = game.planet.map.All(tile => tile.Revealed || tile.Flagged);
@@ -72,7 +76,6 @@ public class GameUI : MonoBehaviour
             {
                 allInspected.SetActive(true);
             }
-        };
         };
     }
 
