@@ -237,6 +237,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 1471753331}
+--- !u!1 &1054705958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1648398893508808479, guid: 668a5c94ee374e2478483f5fa4d39bd0, type: 3}
+  m_PrefabInstance: {fileID: 9187709434072447267}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1054705961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054705958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c0ea3f5882b6f44a779151304d21b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  startPos: {x: 0, y: 21}
+  endPos: {x: 0, y: 11}
+  targetPos: {x: 0, y: 0}
 --- !u!1 &1121731231
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +289,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetDisplayer: {fileID: 445616200}
   planetGenerationList:
-  - {fileID: 11400000, guid: 22f44a8371a8b3547a60f1806a104c88, type: 2}
   - {fileID: 11400000, guid: cbd2457dc5a5acb44bce91514cc499e1, type: 2}
   enemyPrefab: {fileID: 2840984916704978721, guid: 875f65f66da7dc04cbab264d4bf11476, type: 3}
 --- !u!4 &1121731233
@@ -472,7 +492,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1648398893508808479, guid: 668a5c94ee374e2478483f5fa4d39bd0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1054705961}
   m_SourcePrefab: {fileID: 100100000, guid: 668a5c94ee374e2478483f5fa4d39bd0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

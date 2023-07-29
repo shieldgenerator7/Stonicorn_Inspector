@@ -20,7 +20,7 @@ public class PlayerDisplayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         //Update display
         Vector2 pos = player.Position;

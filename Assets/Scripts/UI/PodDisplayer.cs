@@ -15,7 +15,6 @@ public class PodDisplayer : MonoBehaviour
         game = FindObjectOfType<GameUI>().Game;
         player = game.player;
         startpos = player.Position;
-        transform.position = startpos;
     }
 
     // Update is called once per frame
@@ -31,16 +30,10 @@ public class PodDisplayer : MonoBehaviour
                 );
             if (!anySafeUnrevealed)
             {
-                //Win the game
-                FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
-                    enemyDisplayer => Destroy(enemyDisplayer)
-                    );
-                player.moveSpeed = 0;
-                FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
-                    detectorDisplayer => Destroy(detectorDisplayer.gameObject)
-                    );
-
+                onPlayerFinished?.Invoke();
             }
         }
     }
+    public delegate void OnPlayerFinished();
+    public event OnPlayerFinished onPlayerFinished;
 }

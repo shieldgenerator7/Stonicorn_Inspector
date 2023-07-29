@@ -77,6 +77,9 @@ public class Grid<T> where T : class
     public bool Any(Func<T, bool> filter)
         => grid.Values.Any((val) => filter(val));
 
+    public bool All(Func<T, bool> filter)
+        => grid.Values.All((val) => filter(val));
+
     public Vector2Int Min
     {
         get

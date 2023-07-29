@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
@@ -19,12 +21,50 @@ public class GameUI : MonoBehaviour
         game = new Game();
         game.startGame(planetGenerationList.randomItem());
         planetDisplayer.init(game.planet);
-        FindObjectOfType<PlayerController>().player = game.player;
+        PlayerController pc = FindObjectOfType<PlayerController>();
+        pc.player = game.player;
         FindObjectOfType<PlayerDisplayer>().init(game.player);
+
+        FindObjectOfType<PlayerDisplayer>().Update();
         game.enemies.ForEach(enemy => makeEnemy(enemy));
         //delegates
         this.enabled = false;
         game.onTickingChanged += (ticking) => this.enabled = ticking;
+        //Ship
+        game.player.moveSpeed = 0;
+        ShipController sc = FindObjectOfType<ShipController>();
+        pc.transform.parent = sc.transform;
+        pc.transform.localPosition = Vector2.zero;
+        FindObjectOfType<PlayerDisplayer>().enabled = false;
+        sc.gotoEnd();
+        sc.onTargetReached += (pos) =>
+        {
+            FindObjectOfType<PlayerDisplayer>().enabled = true;
+            game.player.moveSpeed = 2;
+            pc.transform.parent = null;
+        };
+        FindObjectOfType<PodDisplayer>().onPlayerFinished += () =>
+        {
+            bool allTilesRevealed = game.planet.map.All(tile => tile.Revealed || tile.Flagged);
+            if (allTilesRevealed)
+            {
+                sc.gotoStart();
+                sc.onTargetReached += (pos) =>
+                {
+                    SceneManager.LoadScene(0);
+                };
+            }
+            FindObjectOfType<PlayerDisplayer>().enabled = false;
+            pc.transform.parent = sc.transform;
+            //Win the game
+            FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
+                enemyDisplayer => Destroy(enemyDisplayer)
+                );
+            game.player.moveSpeed = 0;
+            FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
+                detectorDisplayer => Destroy(detectorDisplayer.gameObject)
+                );
+        };
     }
 
     void makeEnemy(Enemy enemy)
