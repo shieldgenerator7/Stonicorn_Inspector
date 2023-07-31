@@ -131,10 +131,16 @@ public class Player : Entity
             {
                 Vector2Int pos = new Vector2Int(i, j);
                 Tile tile = game.planet.map[pos];
+                //Skip hidden and flagged tiles
+                if (tile && (!tile.Revealed || tile.Flagged))
+                {
+                    continue;
+                }
+                //Get hidden neighbor count
                 int hiddenNeighborCount = game.planet.map.getNeighborCount(
                     pos, 1, (t => t && !t.Revealed && !t.Flagged)
                     );
-                if ((!tile || tile.Revealed) && hiddenNeighborCount > 0)
+                if (hiddenNeighborCount > 0)
                 {
                     placeDetector(pos);
                 }
