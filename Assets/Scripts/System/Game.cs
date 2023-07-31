@@ -10,7 +10,6 @@ public class Game
     public Player player;
     public List<Enemy> enemies = new List<Enemy>();
     public Vector2Int podPosition { get; private set; }
-    public StonicornSettings playerSettings;
 
     private bool ticking = false;//whether or not time is progressing forward
     public bool Ticking
@@ -25,9 +24,9 @@ public class Game
     public delegate void OnTickingChanged(bool ticking);
     public event OnTickingChanged onTickingChanged;
 
-    public Game(Player player = null)
+    public Game(StonicornSettings playerSettings)
     {
-        this.player = player ?? new Player(this, playerSettings);
+        this.player = new Player(this, playerSettings);
         this.player.onMovePositionChanged += (pos) => Ticking = true;
         this.player.onPosReached += (pos) => Ticking = false;
     }

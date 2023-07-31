@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameUI : MonoBehaviour
 {
     public PlanetDisplayer planetDisplayer;
+    public StonicornSettings playerSettings;
     public List<PlanetGeneration> planetGenerationList;
     public GameObject allInspected;
 
@@ -19,7 +20,7 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        game = new Game();
+        game = new Game(playerSettings);
         game.startGame(planetGenerationList.randomItem());
         planetDisplayer.init(game.planet);
         PlayerController pc = FindObjectOfType<PlayerController>();
