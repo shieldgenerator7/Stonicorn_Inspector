@@ -8,6 +8,8 @@ public class Enemy : Entity
     private bool trapped = false;
     private Tile hidingTile;
     private Tile currentTile = null;
+    private float seekRange = 2;
+    private float randomDirectionChangeChance = 0.001f;
 
     public Enemy(Game game) : base(game)
     {
@@ -65,19 +67,31 @@ public class Enemy : Entity
 
     public override void process()
     {
-        if (found)
-        {
+            //Target player
+            Vector2 targetPos = game.player.Position;
+            //Target random direction
+            Vector2 pos = Position;
+            if (!found || Vector2.Distance(targetPos, pos) > seekRange)
+            {
+                //Random chance of changing direction
+                if (Random.Range(0, 1) <= randomDirectionChangeChance)
+                {
+                    targetPos = new Vector2(
+                        Random.Range(pos.x - 3, pos.x + 3),
+                        Random.Range(pos.y - 3, pos.y + 3)
+                        );
+                }
+            }
             //Move towards player
             if (!trapped)
             {
-                MovePosition = game.player.Position;
+                MovePosition = targetPos;
             }
             //Move as close to player as possible while trapped
             else
             {
-                MovePosition = (game.player.Position - Position).normalized * 0.3f + currentTile.position;
+                MovePosition = (targetPos - pos).normalized * 0.3f + currentTile.position;
             }
             move();
-        }
     }
 }

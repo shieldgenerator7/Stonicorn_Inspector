@@ -96,12 +96,12 @@ public class PlayerController : MonoBehaviour
         List<Tile> neighbors = player.game.planet.map.getNeighbors(pos);
         List<Tile> hiddenHazardNeigbors = neighbors.FindAll(nghbr => nghbr &&
             !nghbr.Revealed &&
-            player.game.enemies.Any(enemy => enemy.Position == nghbr.position)
+            player.game.enemies.Any(enemy => enemy.Position.toVector2Int() == nghbr.position)
             );
         int hiddenHazardCount = hiddenHazardNeigbors.Count;
         int hiddenSafeCount = neighbors.Count(nghbr => nghbr &&
             !nghbr.Revealed &&
-            !player.game.enemies.Any(enemy => enemy.Position == nghbr.position));
+            !player.game.enemies.Any(enemy => enemy.Position.toVector2Int() == nghbr.position));
         bool canAutoFlag = hiddenHazardCount > 0 && hiddenSafeCount == 0
             && hiddenHazardNeigbors.Any(nghbr => !nghbr.Flagged);
         //autoflag
