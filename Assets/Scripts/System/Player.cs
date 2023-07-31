@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    private PlayerSettings settings;
+    private StonicornSettings settings;
 
     public enum Task
     {
@@ -20,7 +20,7 @@ public class Player : Entity
     private List<Detector> detectors = new List<Detector>();
     public int DetectorCount => detectors.Count;
 
-    public Player(Game game, PlayerSettings settings) : base(game)
+    public Player(Game game, StonicornSettings settings) : base(game)
     {
         this.settings = settings;
         this.moveSpeed = settings.moveSpeed;

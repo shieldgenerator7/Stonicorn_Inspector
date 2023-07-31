@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player", menuName = "Settings/Player")]
-public class PlayerSettings : EntitySettings
+public class StonicornSettings : EntitySettings
 {
     [Tooltip("How far away the player can see from themselves")]
     /// <summary>

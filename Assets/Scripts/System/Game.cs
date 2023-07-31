@@ -10,7 +10,7 @@ public class Game
     public Player player;
     public List<Enemy> enemies = new List<Enemy>();
     public Vector2Int podPosition;
-    public PlayerSettings playerSettings;
+    public StonicornSettings playerSettings;
 
     private bool ticking = false;//whether or not time is progressing forward
     public bool Ticking
