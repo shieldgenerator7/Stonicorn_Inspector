@@ -6,10 +6,8 @@ public class PodController : MonoBehaviour
 {
     public float speed = 1;
 
-    public Vector2 startPos;
-    public Vector2 endPos;
-
-    [SerializeField]
+    private Vector2 startPos;
+    private Vector2 endPos;
     private Vector2 targetPos;
 
     public void init(Vector2 podPosition)
