@@ -8,8 +8,8 @@ public class Enemy : Entity
     private bool trapped = false;
     private Tile hidingTile;
     private Tile currentTile = null;
-    private float seekRange = 2;
-    private float randomDirectionChangeChance = 0.001f;
+    private float seekRange = 1;
+    private Vector2 startPos;
 
     public Enemy(Game game) : base(game)
     {
@@ -37,6 +37,7 @@ public class Enemy : Entity
         };
         Position = pos;
         MovePosition = pos;
+        startPos = pos;
         hidingTile = game.planet.map[pos];
         found = hidingTile.Revealed;
         hidingTile.onRevealedChanged += OnFound;
@@ -71,17 +72,21 @@ public class Enemy : Entity
             Vector2 targetPos = game.player.Position;
             //Target random direction
             Vector2 pos = Position;
-            if (!found || Vector2.Distance(targetPos, pos) > seekRange)
+            if (Vector2.Distance(targetPos, pos) > seekRange)
             {
-                //Random chance of changing direction
-                if (Random.Range(0, 1) <= randomDirectionChangeChance)
+                targetPos = MovePosition;
+                //If already here,
+                if (targetPos == pos)
                 {
+                    //change direction randomly
                     targetPos = new Vector2(
                         Random.Range(pos.x - 3, pos.x + 3),
                         Random.Range(pos.y - 3, pos.y + 3)
                         );
                 }
             }
+            if (targetPos != MovePosition)
+            {
             //Move towards player
             if (!trapped)
             {
@@ -91,6 +96,7 @@ public class Enemy : Entity
             else
             {
                 MovePosition = (targetPos - pos).normalized * 0.3f + currentTile.position;
+            }
             }
             move();
     }
