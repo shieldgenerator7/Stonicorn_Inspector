@@ -5,14 +5,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    /// <summary>
-    /// How far away the player can see from themselves
-    /// </summary>
-    public int visionRange = 5;
-    /// <summary>
-    /// How close the player must be to reveal a tile
-    /// </summary>
-    public int inspectRange = 2;
+    private PlayerSettings settings;
 
     public enum Task
     {
@@ -27,8 +20,11 @@ public class Player : Entity
     private List<Detector> detectors = new List<Detector>();
     public int DetectorCount => detectors.Count;
 
-    public Player(Game game) : base(game)
+    public Player(Game game, PlayerSettings settings) : base(game)
     {
+        this.settings = settings;
+        this.moveSpeed = settings.moveSpeed;
+
         onPositionChanged += (pos) => followDetector?.detect(pos.toVector2Int());
     }
     public void init(Planet planet)
@@ -63,7 +59,7 @@ public class Player : Entity
     /// </returns>
     public bool tryReveal()
     {
-        if (Utility.DistanceInt(MovePosition.toVector2Int(), Position.toVector2Int()) <= inspectRange)
+        if (Utility.DistanceInt(MovePosition.toVector2Int(), Position.toVector2Int()) <= settings.inspectRange)
         {
             Tile moveTile = game.planet.map[MovePosition.toVector2Int()];
             if (!moveTile)
@@ -98,7 +94,7 @@ public class Player : Entity
     /// </returns>
     public bool tryFlag()
     {
-        if (Utility.DistanceInt(MovePosition.toVector2Int(), Position.toVector2Int()) <= inspectRange)
+        if (Utility.DistanceInt(MovePosition.toVector2Int(), Position.toVector2Int()) <= settings.inspectRange)
         {
             Tile moveTile = game.planet.map[MovePosition.toVector2Int()];
             if (!moveTile)
