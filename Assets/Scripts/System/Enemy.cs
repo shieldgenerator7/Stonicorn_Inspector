@@ -15,6 +15,7 @@ public class Enemy : Entity
     public Enemy(Game game, EnemySettings settings) : base(game)
     {
         this.settings = settings;
+        this.moveSpeed = settings.moveSpeed;
     }
     public void init(Vector2Int pos)
     {
@@ -71,10 +72,12 @@ public class Enemy : Entity
     {
         //Target player
         Vector2 targetPos = game.player.Position;
+        this.moveSpeed = settings.moveSpeed;
         //Target random direction
         Vector2 pos = Position;
         if (Vector2.Distance(targetPos, pos) > settings.seekRange)
         {
+            this.moveSpeed = settings.wanderMoveSpeed;
             targetPos = MovePosition;
             //If already here,
             if (targetPos == pos)
