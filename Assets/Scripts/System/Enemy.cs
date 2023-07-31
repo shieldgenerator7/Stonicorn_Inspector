@@ -9,6 +9,7 @@ public class Enemy : Entity
     private Tile hidingTile;
     private Tile currentTile = null;
     private float seekRange = 1;
+    private float tetherRange = 1;
     private Vector2 startPos;
 
     public Enemy(Game game) : base(game)
@@ -78,11 +79,20 @@ public class Enemy : Entity
                 //If already here,
                 if (targetPos == pos)
                 {
+                    //if at start,
+                    if (pos == startPos)
+                    {
                     //change direction randomly
                     targetPos = new Vector2(
-                        Random.Range(pos.x - 3, pos.x + 3),
-                        Random.Range(pos.y - 3, pos.y + 3)
-                        );
+                        Random.Range(pos.x - tetherRange, pos.x + tetherRange),
+                        Random.Range(pos.y - tetherRange, pos.y + tetherRange)
+                        ).toVector2Int();
+                    }
+                    //go to start
+                    else
+                    {
+                        targetPos = startPos;
+                    }
                 }
             }
             if (targetPos != MovePosition)
