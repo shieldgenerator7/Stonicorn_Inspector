@@ -69,34 +69,34 @@ public class Enemy : Entity
 
     public override void process()
     {
-            //Target player
-            Vector2 targetPos = game.player.Position;
-            //Target random direction
-            Vector2 pos = Position;
-            if (Vector2.Distance(targetPos, pos) > seekRange)
+        //Target player
+        Vector2 targetPos = game.player.Position;
+        //Target random direction
+        Vector2 pos = Position;
+        if (Vector2.Distance(targetPos, pos) > seekRange)
+        {
+            targetPos = MovePosition;
+            //If already here,
+            if (targetPos == pos)
             {
-                targetPos = MovePosition;
-                //If already here,
-                if (targetPos == pos)
+                //if at start,
+                if (pos == startPos)
                 {
-                    //if at start,
-                    if (pos == startPos)
-                    {
                     //change direction randomly
                     targetPos = new Vector2(
                         Random.Range(pos.x - tetherRange, pos.x + tetherRange),
                         Random.Range(pos.y - tetherRange, pos.y + tetherRange)
                         ).toVector2Int();
-                    }
-                    //go to start
-                    else
-                    {
-                        targetPos = startPos;
-                    }
+                }
+                //go to start
+                else
+                {
+                    targetPos = startPos;
                 }
             }
-            if (targetPos != MovePosition)
-            {
+        }
+        if (targetPos != MovePosition)
+        {
             //Move towards player
             if (!trapped)
             {
@@ -107,7 +107,7 @@ public class Enemy : Entity
             {
                 MovePosition = (targetPos - pos).normalized * 0.3f + currentTile.position;
             }
-            }
-            move();
+        }
+        move();
     }
 }

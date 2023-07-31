@@ -44,14 +44,14 @@ public class Detector : Entity
             enemy => Utility.DistanceInt(
                 pos,
                 enemy.Position.toVector2Int()
-                ) <= range 
+                ) <= range
                 && !(map[enemy.Position.toVector2Int()]?.Flagged ?? false)
             );
     }
 
     public void destroy()
     {
-        onDestroyed?.Invoke();   
+        onDestroyed?.Invoke();
     }
     public delegate void OnDestroyed();
     public event OnDestroyed onDestroyed;

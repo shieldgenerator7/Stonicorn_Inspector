@@ -63,7 +63,7 @@ public class CustomMenu
             FindInGO(childT.gameObject);
         }
     }
-    
+
     public static List<Scene> getLevelScenes(Func<Scene, bool> filter = null, bool reportFailures = false)
     {
         List<Scene> scenes = new List<Scene>();
@@ -85,7 +85,7 @@ public class CustomMenu
         return scenes;
     }
 
-       //2020-12-09: copied from https://forum.unity.com/threads/how-to-collapse-hierarchy-scene-nodes-via-script.605245/#post-6551890
+    //2020-12-09: copied from https://forum.unity.com/threads/how-to-collapse-hierarchy-scene-nodes-via-script.605245/#post-6551890
     private static void SetExpanded(Scene scene, bool expand)
     {
         foreach (var window in Resources.FindObjectsOfTypeAll<SearchableEditorWindow>())

@@ -47,24 +47,24 @@ public class GameUI : MonoBehaviour
         };
         game.onGameEnded += () =>
         {
-                sc.gotoStart();
-                sc.onTargetReached += (pos) =>
-                {
-                    SceneManager.LoadScene(0);
-                };
+            sc.gotoStart();
+            sc.onTargetReached += (pos) =>
+            {
+                SceneManager.LoadScene(0);
+            };
 
-                pd.enabled = false;
-                pc.transform.parent = sc.transform;
-                //Win the game
-                FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
-                    enemyDisplayer => Destroy(enemyDisplayer)
-                    );
-                game.player.moveSpeed = 0;
-                FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
-                    detectorDisplayer => Destroy(detectorDisplayer.gameObject)
-                    );
+            pd.enabled = false;
+            pc.transform.parent = sc.transform;
+            //Win the game
+            FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
+                enemyDisplayer => Destroy(enemyDisplayer)
+                );
+            game.player.moveSpeed = 0;
+            FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
+                detectorDisplayer => Destroy(detectorDisplayer.gameObject)
+                );
 
-                allInspected.SetActive(false);
+            allInspected.SetActive(false);
         };
         pc.player.OnTileRevealed += (tile, state) =>
         {
