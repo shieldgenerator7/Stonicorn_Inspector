@@ -272,6 +272,9 @@ MonoBehaviour:
   planetGenerationList:
   - {fileID: 11400000, guid: 22f44a8371a8b3547a60f1806a104c88, type: 2}
   - {fileID: 11400000, guid: cbd2457dc5a5acb44bce91514cc499e1, type: 2}
+  - {fileID: 11400000, guid: 893beba719d555f46a884a3bfc04e2ba, type: 2}
+  - {fileID: 11400000, guid: 22f44a8371a8b3547a60f1806a104c88, type: 2}
+  - {fileID: 11400000, guid: cbd2457dc5a5acb44bce91514cc499e1, type: 2}
   allInspected: {fileID: 1777805546}
   enemyPrefab: {fileID: 2840984916704978721, guid: 875f65f66da7dc04cbab264d4bf11476, type: 3}
 --- !u!4 &1121731233
