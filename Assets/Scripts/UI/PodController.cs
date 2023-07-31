@@ -12,10 +12,9 @@ public class PodController : MonoBehaviour
     [SerializeField]
     private Vector2 targetPos;
 
-    private void Start()
+    public void init(Vector2 podPosition)
     {
-        Game game = FindObjectOfType<GameUI>().Game;
-        endPos = game.player.Position;
+        endPos = podPosition;
         startPos = endPos + (Vector2.up * 10);
         transform.position = startPos;
     }
@@ -28,6 +27,7 @@ public class PodController : MonoBehaviour
             if (Vector2.Distance(transform.position, targetPos) < 0.25f)
             {
                 transform.position = targetPos;
+                this.enabled = false;
                 onTargetReached?.Invoke(targetPos);
             }
         }
@@ -36,10 +36,12 @@ public class PodController : MonoBehaviour
     public void gotoStart()
     {
         targetPos = startPos;
+        this.enabled = true;
     }
     public void gotoEnd()
     {
         targetPos = endPos;
+        this.enabled = true;
     }
     public delegate void OnTargetReached(Vector2 pos);
     public event OnTargetReached onTargetReached;

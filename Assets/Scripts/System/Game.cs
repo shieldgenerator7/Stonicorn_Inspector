@@ -9,6 +9,7 @@ public class Game
     public Planet planet;
     public Player player;
     public List<Enemy> enemies = new List<Enemy>();
+    public Vector2Int podPosition;
 
     private bool ticking = false;//whether or not time is progressing forward
     public bool Ticking
@@ -50,8 +51,9 @@ public class Game
         Vector2Int min = planet.map.Min;
         Vector2Int max = planet.map.Max;
         Vector2 startPos = new Vector2((min.x + max.x) / 2, max.y + 3);
-        player.Position = startPos;
-        player.MovePosition = player.Position;
+        podPosition = startPos.toVector2Int();
+        player.Position = podPosition;
+        player.MovePosition = podPosition;
         //Init player
         player.init(planet);
     }

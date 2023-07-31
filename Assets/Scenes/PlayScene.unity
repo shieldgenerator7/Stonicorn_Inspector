@@ -252,7 +252,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1054705958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c0ea3f5882b6f44a779151304d21b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a886bf79b92d444294b8f99a9efeb0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
@@ -291,8 +291,11 @@ MonoBehaviour:
   planetDisplayer: {fileID: 445616200}
   planetGenerationList:
   - {fileID: 11400000, guid: 22f44a8371a8b3547a60f1806a104c88, type: 2}
+  - {fileID: 11400000, guid: cbd2457dc5a5acb44bce91514cc499e1, type: 2}
   allInspected: {fileID: 1777805546}
   enemyPrefab: {fileID: 2840984916704978721, guid: 875f65f66da7dc04cbab264d4bf11476, type: 3}
+  game:
+    podPosition: {x: 0, y: 0}
 --- !u!4 &1121731233
 Transform:
   m_ObjectHideFlags: 0

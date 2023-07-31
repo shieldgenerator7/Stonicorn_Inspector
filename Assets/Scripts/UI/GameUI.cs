@@ -31,9 +31,10 @@ public class GameUI : MonoBehaviour
         //delegates
         this.enabled = false;
         game.onTickingChanged += (ticking) => this.enabled = ticking;
-        //Ship
+        //Pod
         game.player.moveSpeed = 0;
         PodController sc = FindObjectOfType<PodController>();
+        sc.init(game.podPosition);
         pc.transform.parent = sc.transform;
         pc.transform.localPosition = Vector2.zero;
         pd.enabled = false;
