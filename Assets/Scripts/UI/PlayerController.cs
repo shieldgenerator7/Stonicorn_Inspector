@@ -80,6 +80,11 @@ public class PlayerController : MonoBehaviour
                         stopTask();
                         startTickingTimer();
                     }
+                    else
+                    {
+                        player.MovePosition = mousePosInt;
+                        timeEnd = 0;
+                    }
                 }
                 //Move to position
                 else
