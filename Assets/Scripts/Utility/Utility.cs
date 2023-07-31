@@ -6,6 +6,8 @@ public static class Utility
 {
     #region Vector Extensions
 
+    public const float VECTOR_APPROX_THRESHOLD = 0.1f;
+
     public static Vector2Int toVector2Int(this Vector2 v)
     {
         return new Vector2Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.y));
@@ -22,12 +24,12 @@ public static class Utility
 
     public static bool Approximately(this Vector2 v1, Vector2 v2)
     {
-        return Mathf.Approximately(Vector2.Distance(v1, v2), 0);
+        return Vector2.Distance(v1, v2) <= VECTOR_APPROX_THRESHOLD;
     }
 
     public static bool Approximately(this Vector3 v1, Vector3 v2)
     {
-        return Mathf.Approximately(Vector3.Distance(v1, v2), 0);
+        return Vector3.Distance(v1, v2) <= VECTOR_APPROX_THRESHOLD;
     }
 
     public static int DistanceInt(Vector2Int vi1, Vector2Int vi2)
