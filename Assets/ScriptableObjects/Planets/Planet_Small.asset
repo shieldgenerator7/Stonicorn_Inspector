@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1bfd39b2bdb9d9a44951371e13b667b0, type: 2}
   - {fileID: 11400000, guid: e4c8ebf0a3673c34880643bdeb86faaa, type: 2}
   enemies:
-  - {fileID: 11400000, guid: bad2ad14df62ea4418a1b5984aebe0d1, type: 2}
+  - {fileID: 11400000, guid: 62a503e07cd9fda4ba38eb1d3e24bd4b, type: 2}
