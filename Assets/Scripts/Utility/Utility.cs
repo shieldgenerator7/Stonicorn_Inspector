@@ -20,6 +20,16 @@ public static class Utility
         return v.normalized * distance;
     }
 
+    public static bool Approximately(this Vector2 v1, Vector2 v2)
+    {
+        return Mathf.Approximately(Vector2.Distance(v1, v2), 0);
+    }
+
+    public static bool Approximately(this Vector3 v1, Vector3 v2)
+    {
+        return Mathf.Approximately(Vector3.Distance(v1, v2), 0);
+    }
+
     public static int DistanceInt(Vector2Int vi1, Vector2Int vi2)
     {
         //includes moving diagonally as one move

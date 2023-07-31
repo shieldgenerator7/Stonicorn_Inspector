@@ -22,7 +22,7 @@ public class PodController : MonoBehaviour
         if ((Vector2)transform.position != targetPos)
         {
             transform.position = Vector2.Lerp(transform.position, targetPos, speed * Time.deltaTime);
-            if (Vector2.Distance(transform.position, targetPos) < 0.25f)
+            if (targetPos.Approximately(transform.position))
             {
                 transform.position = targetPos;
                 this.enabled = false;

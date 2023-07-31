@@ -62,7 +62,7 @@ public class Entity
                 moveSpeed * Time.deltaTime,
                 Vector2.Distance(position, movePos)
                 );
-            if (Mathf.Approximately(Vector2.Distance(position, movePos), 0))
+            if (position.Approximately(movePos))
             {
                 Position = movePos;
                 onPosReached?.Invoke(position);
