@@ -187,6 +187,17 @@ public class Player : Entity
         }
     }
 
+    public void flagTile(Vector2Int position)
+    {
+        Grid<Tile> map = game.planet.map;
+        Tile tile = map[position];
+        if (tile)
+        {
+            tile.Flagged = true;
+            OnTileFlagged?.Invoke(tile, true);
+        }
+    }
+
     public bool WithinRangeInt(Vector2 pos)
     {
         return WithinRangeInt(pos.toVector2Int());

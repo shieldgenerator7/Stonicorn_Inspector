@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
         player.OnTileRevealed += (tile, state) => tryAutoFlag(player.Position.toVector2Int(), 2);
         //Stop the player whenever they reveal a tile
         player.OnTileRevealed += stopTask;
+        player.OnTileFlagged += stopTask;
     }
 
     void stopTask(Tile tile = null, bool state = false)
@@ -61,6 +62,29 @@ public class PlayerController : MonoBehaviour
                 }
                 player.MovePosition = mousePosInt;
                 timeEnd = 0;
+            }
+            //Flag tile if it's revealed with an enemy
+            if (tile?.Revealed ?? false)
+            {
+                bool enemyOnTile = player.game.enemies
+                    .Any(enemy => enemy.Position.toVector2Int() == mousePosInt);
+                if (enemyOnTile)
+                {
+                    //Flag enemy tile without moving
+                    if (mouseInRange)
+                    {
+                        player.flagTile(mousePosInt);
+                        stopTask();
+                        startTickingTimer();
+                    }
+                    //Move to position
+                    else
+                    {
+                        player.task = Player.Task.FLAG;
+                        player.MovePosition = mousePosInt;
+                        timeEnd = 0;
+                    }
+                }
             }
         }
 
