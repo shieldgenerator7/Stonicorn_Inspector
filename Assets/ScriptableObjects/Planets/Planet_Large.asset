@@ -15,3 +15,5 @@ MonoBehaviour:
   mapGenerators:
   - {fileID: 11400000, guid: 1dc8b90c137e7824f84512dde9aeb3de, type: 2}
   - {fileID: 11400000, guid: 8ea96705521d9ba4ba35ae056235eb65, type: 2}
+  enemies:
+  - {fileID: 11400000, guid: bad2ad14df62ea4418a1b5984aebe0d1, type: 2}

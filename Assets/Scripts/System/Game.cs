@@ -42,7 +42,7 @@ public class Game
             );
         hazardTiles.ForEach(tile =>
         {
-            Enemy enemy = new Enemy(this);
+            Enemy enemy = new Enemy(this, planetGeneration.getRandomEnemy());
             enemy.init(tile.position);
             enemies.Add(enemy);
             tile.objects.RemoveAll(obj => obj is Hazard);

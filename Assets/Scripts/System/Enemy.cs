@@ -8,13 +8,13 @@ public class Enemy : Entity
     private bool trapped = false;
     private Tile hidingTile;
     private Tile currentTile = null;
-    private float seekRange = 1;
-    private float tetherRange = 1;
     private Vector2 startPos;
+    private EnemySettings settings;
 
-    public Enemy(Game game) : base(game)
+
+    public Enemy(Game game, EnemySettings settings) : base(game)
     {
-        moveSpeed = game.player.moveSpeed / 2;
+        this.settings = settings;
     }
     public void init(Vector2Int pos)
     {
@@ -73,7 +73,7 @@ public class Enemy : Entity
         Vector2 targetPos = game.player.Position;
         //Target random direction
         Vector2 pos = Position;
-        if (Vector2.Distance(targetPos, pos) > seekRange)
+        if (Vector2.Distance(targetPos, pos) > settings.seekRange)
         {
             targetPos = MovePosition;
             //If already here,
@@ -84,8 +84,8 @@ public class Enemy : Entity
                 {
                     //change direction randomly
                     targetPos = new Vector2(
-                        Random.Range(pos.x - tetherRange, pos.x + tetherRange),
-                        Random.Range(pos.y - tetherRange, pos.y + tetherRange)
+                        Random.Range(pos.x - settings.tetherRange, pos.x + settings.tetherRange),
+                        Random.Range(pos.y - settings.tetherRange, pos.y + settings.tetherRange)
                         ).toVector2Int();
                 }
                 //go to start
