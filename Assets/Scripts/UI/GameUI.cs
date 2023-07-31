@@ -45,11 +45,8 @@ public class GameUI : MonoBehaviour
             game.player.moveSpeed = 2;
             pc.transform.parent = null;
         };
-        FindObjectOfType<PodDisplayer>().onPlayerFinished += () =>
+        game.onGameEnded += () =>
         {
-            bool allTilesRevealed = game.planet.map.All(tile => tile.Revealed || tile.Flagged);
-            if (allTilesRevealed)
-            {
                 sc.gotoStart();
                 sc.onTargetReached += (pos) =>
                 {
@@ -68,7 +65,6 @@ public class GameUI : MonoBehaviour
                     );
 
                 allInspected.SetActive(false);
-            }
         };
         pc.player.OnTileRevealed += (tile, state) =>
         {

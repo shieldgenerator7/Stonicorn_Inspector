@@ -56,6 +56,10 @@ public class Game
         player.MovePosition = podPosition;
         //Init player
         player.init(planet);
+        //Delegates
+        player.OnTileRevealed += (tile, state) => checkGameEnd();
+        player.OnTileFlagged += (tile, state) => checkGameEnd();
+        player.onPosReached += (pos) => checkGameEnd();
     }
 
     public void process()
@@ -63,4 +67,16 @@ public class Game
         player.process();
         enemies.ForEach(enemy => enemy.process());
     }
+
+    private void checkGameEnd()
+    {
+        bool allTilesRevealed = planet.map.All(tile => tile.Revealed || tile.Flagged);
+        bool playerInPod = player.Position == podPosition;
+        if (allTilesRevealed && playerInPod)
+        {
+            onGameEnded?.Invoke();
+        }
+    }
+    public delegate void OnGameEnded();
+    public event OnGameEnded onGameEnded;
 }
