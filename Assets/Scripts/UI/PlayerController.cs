@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             overlapTile = player.game.planet.map[mousePos.toVector2Int()];
         }
         Vector2Int mousePosInt = mousePos.toVector2Int();
-        bool mouseInRange = Utility.DistanceInt(player.Position.toVector2Int(), mousePosInt) <= player.inspectRange;
+        bool mouseInRange = player.WithinRangeInt(mousePosInt);
         if (leftclick)
         {
             //Reveal tile without moving

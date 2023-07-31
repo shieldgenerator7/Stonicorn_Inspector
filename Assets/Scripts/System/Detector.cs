@@ -41,10 +41,7 @@ public class Detector : Entity
         this.pos = pos;
         Grid<Tile> map = game.planet.map;
         Detected = game.enemies.Count(
-            enemy => Utility.DistanceInt(
-                pos,
-                enemy.Position.toVector2Int()
-                ) <= range
+            enemy => Utility.WithinRangeInt(pos, enemy.Position, range)
                 && !(map[enemy.Position.toVector2Int()]?.Flagged ?? false)
             );
     }

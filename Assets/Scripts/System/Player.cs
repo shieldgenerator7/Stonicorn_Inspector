@@ -59,7 +59,7 @@ public class Player : Entity
     /// </returns>
     public bool tryReveal()
     {
-        if (Utility.DistanceInt(MovePosition.toVector2Int(), Position.toVector2Int()) <= settings.inspectRange)
+        if (WithinRangeInt(MovePosition))
         {
             Tile moveTile = game.planet.map[MovePosition.toVector2Int()];
             if (!moveTile)
@@ -94,7 +94,7 @@ public class Player : Entity
     /// </returns>
     public bool tryFlag()
     {
-        if (Utility.DistanceInt(MovePosition.toVector2Int(), Position.toVector2Int()) <= settings.inspectRange)
+        if (WithinRangeInt(MovePosition))
         {
             Tile moveTile = game.planet.map[MovePosition.toVector2Int()];
             if (!moveTile)
@@ -185,6 +185,15 @@ public class Player : Entity
             tile.Revealed = true;
             OnTileRevealed?.Invoke(tile, true);
         }
+    }
+
+    public bool WithinRangeInt(Vector2 pos)
+    {
+        return WithinRangeInt(pos.toVector2Int());
+    }
+    public bool WithinRangeInt(Vector2Int pos)
+    {
+        return Utility.WithinRangeInt(pos, Position, settings.inspectRange);
     }
 
 }

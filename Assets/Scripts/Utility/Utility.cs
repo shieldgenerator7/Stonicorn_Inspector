@@ -40,6 +40,14 @@ public static class Utility
             Mathf.Abs(vi1.y - vi2.y)
             );
     }
+    public static bool WithinRangeInt(Vector2 v1, Vector2 v2, int range)
+    {
+        return WithinRangeInt(v1.toVector2Int(), v2.toVector2Int(), range);
+    }
+    public static bool WithinRangeInt(Vector2Int vi1, Vector2Int vi2, int range)
+    {
+        return DistanceInt(vi1, vi2) <= range;
+    }
 
     #endregion
 
