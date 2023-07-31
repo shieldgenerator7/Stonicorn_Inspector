@@ -71,23 +71,26 @@ public class PlayerController : MonoBehaviour
             {
                 bool enemyOnTile = player.game.enemies
                     .Any(enemy => enemy.Position.toVector2Int() == mousePosInt);
-                if (enemyOnTile)
-                {
                     //Flag enemy tile without moving
                     if (mouseInRange)
                     {
+                if (enemyOnTile)
+                {
                         player.flagTile(mousePosInt);
                         stopTask();
                         startTickingTimer();
                     }
+                }
                     //Move to position
                     else
                     {
+                    if (enemyOnTile)
+                    {
                         player.task = Player.Task.FLAG;
+                    }
                         player.MovePosition = mousePosInt;
                         timeEnd = 0;
                     }
-                }
             }
         }
 
