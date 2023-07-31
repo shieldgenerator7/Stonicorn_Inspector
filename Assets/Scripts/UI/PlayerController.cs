@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (enemyOnTile)
                     {
-                        player.flagTile(mousePosInt);
+                        player.flagTile(mousePosInt, !tile.Flagged);
                         stopTask();
                         startTickingTimer();
                     }

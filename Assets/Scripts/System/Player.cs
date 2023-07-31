@@ -183,18 +183,18 @@ public class Player : Entity
         if (tile)
         {
             tile.Revealed = true;
-            OnTileRevealed?.Invoke(tile, true);
+            OnTileRevealed?.Invoke(tile, tile.Revealed);
         }
     }
 
-    public void flagTile(Vector2Int position)
+    public void flagTile(Vector2Int position, bool flag = true)
     {
         Grid<Tile> map = game.planet.map;
         Tile tile = map[position];
         if (tile)
         {
-            tile.Flagged = true;
-            OnTileFlagged?.Invoke(tile, true);
+            tile.Flagged = flag;
+            OnTileFlagged?.Invoke(tile, tile.Flagged);
         }
     }
 
