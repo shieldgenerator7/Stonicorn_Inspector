@@ -33,7 +33,7 @@ public class GameUI : MonoBehaviour
         game.onTickingChanged += (ticking) => this.enabled = ticking;
         //Ship
         game.player.moveSpeed = 0;
-        ShipController sc = FindObjectOfType<ShipController>();
+        PodController sc = FindObjectOfType<PodController>();
         pc.transform.parent = sc.transform;
         pc.transform.localPosition = Vector2.zero;
         FindObjectOfType<PlayerDisplayer>().enabled = false;
