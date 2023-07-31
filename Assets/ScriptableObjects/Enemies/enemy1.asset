@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: enemy1
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  wanderMoveSpeed: 0.5
-  seekRange: 1
-  tetherRange: 1
+  wanderMoveSpeed: 0.25
+  seekRange: 2
+  tetherRange: 2
