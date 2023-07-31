@@ -55,6 +55,7 @@ public class GameUI : MonoBehaviour
 
             pd.enabled = false;
             pc.transform.parent = sc.transform;
+            pc.transform.localPosition = Vector2.zero;
             //Win the game
             FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
                 enemyDisplayer => Destroy(enemyDisplayer)
