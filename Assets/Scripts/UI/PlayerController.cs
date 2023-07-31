@@ -30,19 +30,19 @@ public class PlayerController : MonoBehaviour
         //Receive input
         bool leftclick = Input.GetMouseButtonDown(0);
         bool rightclick = Input.GetMouseButtonDown(1);
-        Vector2 mousePos = Vector2.zero;
-        Tile overlapTile = null;
+        Vector2 mousePos;
+        Vector2Int mousePosInt = Vector2Int.zero;
+        Tile tile = null;
         if (leftclick || rightclick)
         {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            overlapTile = player.game.planet.map[mousePos.toVector2Int()];
+            mousePosInt = mousePos.toVector2Int();
+            tile = player.game.planet.map[mousePosInt];
         }
-        Vector2Int mousePosInt = mousePos.toVector2Int();
-        bool mouseInRange = player.WithinRangeInt(mousePosInt);
         if (leftclick)
         {
+            bool mouseInRange = player.WithinRangeInt(mousePosInt);
             //Reveal tile without moving
-            Tile tile = player.game.planet.map[mousePosInt];
             if (!(tile?.Revealed ?? true) && mouseInRange)
             {
                 if (!tile.Flagged)
@@ -55,7 +55,10 @@ public class PlayerController : MonoBehaviour
             //Move to position
             else
             {
-                player.task = Player.Task.REVEAL;
+                if (tile)
+                {
+                    player.task = Player.Task.REVEAL;
+                }
                 player.MovePosition = mousePosInt;
                 timeEnd = 0;
             }
