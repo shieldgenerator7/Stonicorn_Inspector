@@ -44,8 +44,10 @@ public class PlayerController : MonoBehaviour
         {
             bool mouseInRange = player.WithinRangeInt(mousePosInt);
             //Reveal tile without moving
-            if (!(tile?.Revealed ?? true) && mouseInRange)
+            if (!(tile?.Revealed ?? true))
             {
+                if (mouseInRange)
+                {
                 if (!tile.Flagged)
                 {
                     player.revealTile(mousePosInt);
@@ -62,9 +64,10 @@ public class PlayerController : MonoBehaviour
                 }
                 player.MovePosition = mousePosInt;
                 timeEnd = 0;
+                }
             }
             //Flag tile if it's revealed with an enemy
-            if (tile?.Revealed ?? false)
+            else
             {
                 bool enemyOnTile = player.game.enemies
                     .Any(enemy => enemy.Position.toVector2Int() == mousePosInt);
