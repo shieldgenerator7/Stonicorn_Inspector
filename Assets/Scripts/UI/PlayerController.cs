@@ -9,10 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if (player == null)
-        {
-            player = FindAnyObjectByType<GameUI>().Game.player;
-        }
+        player ??= FindAnyObjectByType<GameUI>().Game.player;
         //Autoflag
         player.onPositionChanged += (pos) => tryAutoFlag(pos.toVector2Int(), 2);
         player.OnTileRevealed += (tile, state) => tryAutoFlag(player.Position.toVector2Int(), 2);
