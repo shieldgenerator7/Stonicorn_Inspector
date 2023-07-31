@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     {
         if (player == null)
         {
-            player = FindObjectOfType<GameUI>().Game.player;
+            player = FindAnyObjectByType<GameUI>().Game.player;
         }
         //Autoflag
         player.onPositionChanged += (pos) => tryAutoFlag(pos.toVector2Int(), 2);

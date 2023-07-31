@@ -23,9 +23,9 @@ public class GameUI : MonoBehaviour
         game = new Game(playerSettings);
         game.startGame(planetGenerationList.randomItem());
         planetDisplayer.init(game.planet);
-        PlayerController pc = FindObjectOfType<PlayerController>();
+        PlayerController pc = FindAnyObjectByType<PlayerController>();
         pc.player = game.player;
-        PlayerDisplayer pd = FindObjectOfType<PlayerDisplayer>();
+        PlayerDisplayer pd = FindAnyObjectByType<PlayerDisplayer>();
         pd.init(game.player);
         pd.Update();
         game.enemies.ForEach(enemy => makeEnemy(enemy));
@@ -34,7 +34,7 @@ public class GameUI : MonoBehaviour
         game.onTickingChanged += (ticking) => this.enabled = ticking;
         //Pod
         game.player.moveSpeed = 0;
-        PodController sc = FindObjectOfType<PodController>();
+        PodController sc = FindAnyObjectByType<PodController>();
         sc.init(game.podPosition);
         pc.transform.parent = sc.transform;
         pc.transform.localPosition = Vector2.zero;
@@ -58,11 +58,11 @@ public class GameUI : MonoBehaviour
             pc.transform.parent = sc.transform;
             pc.transform.localPosition = Vector2.zero;
             //Win the game
-            FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
+            FindObjectsByType<EnemyDisplayer>(FindObjectsSortMode.None).ToList().ForEach(
                 enemyDisplayer => Destroy(enemyDisplayer)
                 );
             game.player.moveSpeed = 0;
-            FindObjectsOfType<DetectorDisplayer>().ToList().ForEach(
+            FindObjectsByType<DetectorDisplayer>(FindObjectsSortMode.None).ToList().ForEach(
                 detectorDisplayer => Destroy(detectorDisplayer.gameObject)
                 );
 
