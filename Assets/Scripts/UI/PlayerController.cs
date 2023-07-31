@@ -16,9 +16,8 @@ public class PlayerController : MonoBehaviour
         //Autoflag
         player.onPositionChanged += (pos) => tryAutoFlag(pos.toVector2Int(), 2);
         player.OnTileRevealed += (tile, state) => tryAutoFlag(player.Position.toVector2Int(), 2);
-        //Stop the player whenever they reveal or flag a tile
+        //Stop the player whenever they reveal a tile
         player.OnTileRevealed += stopTask;
-        player.OnTileFlagged += stopTask;
     }
 
     void stopTask(Tile tile = null, bool state = false)
@@ -61,6 +60,7 @@ public class PlayerController : MonoBehaviour
             {
                 player.task = Player.Task.REVEAL;
                 player.MovePosition = mousePosInt;
+                timeEnd = 0;
             }
         }
 
