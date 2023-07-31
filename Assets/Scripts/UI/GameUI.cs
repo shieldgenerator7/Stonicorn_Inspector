@@ -24,9 +24,9 @@ public class GameUI : MonoBehaviour
         planetDisplayer.init(game.planet);
         PlayerController pc = FindObjectOfType<PlayerController>();
         pc.player = game.player;
-        FindObjectOfType<PlayerDisplayer>().init(game.player);
-
-        FindObjectOfType<PlayerDisplayer>().Update();
+        PlayerDisplayer pd = FindObjectOfType<PlayerDisplayer>();
+        pd.init(game.player);
+        pd.Update();
         game.enemies.ForEach(enemy => makeEnemy(enemy));
         //delegates
         this.enabled = false;
@@ -36,11 +36,11 @@ public class GameUI : MonoBehaviour
         PodController sc = FindObjectOfType<PodController>();
         pc.transform.parent = sc.transform;
         pc.transform.localPosition = Vector2.zero;
-        FindObjectOfType<PlayerDisplayer>().enabled = false;
+        pd.enabled = false;
         sc.gotoEnd();
         sc.onTargetReached += (pos) =>
         {
-            FindObjectOfType<PlayerDisplayer>().enabled = true;
+            pd.enabled = true;
             game.player.moveSpeed = 2;
             pc.transform.parent = null;
         };
@@ -55,7 +55,7 @@ public class GameUI : MonoBehaviour
                     SceneManager.LoadScene(0);
                 };
 
-                FindObjectOfType<PlayerDisplayer>().enabled = false;
+                pd.enabled = false;
                 pc.transform.parent = sc.transform;
                 //Win the game
                 FindObjectsOfType<EnemyDisplayer>().ToList().ForEach(
