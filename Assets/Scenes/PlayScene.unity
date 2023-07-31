@@ -274,7 +274,6 @@ MonoBehaviour:
   allInspected: {fileID: 1777805546}
   enemyPrefab: {fileID: 2840984916704978721, guid: 875f65f66da7dc04cbab264d4bf11476, type: 3}
   game:
-    podPosition: {x: 0, y: 0}
     playerSettings: {fileID: 11400000, guid: adc349fe6e99d2d4d97e13c4a8ac85ee, type: 2}
 --- !u!4 &1121731233
 Transform:
