@@ -48,22 +48,22 @@ public class PlayerController : MonoBehaviour
             {
                 if (mouseInRange)
                 {
-                if (!tile.Flagged)
-                {
-                    player.revealTile(mousePosInt);
-                    stopTask();
-                    startTickingTimer();
+                    if (!tile.Flagged)
+                    {
+                        player.revealTile(mousePosInt);
+                        stopTask();
+                        startTickingTimer();
+                    }
                 }
-            }
-            //Move to position
-            else
-            {
-                if (tile)
+                //Move to position
+                else
                 {
-                    player.task = Player.Task.REVEAL;
-                }
-                player.MovePosition = mousePosInt;
-                timeEnd = 0;
+                    if (tile)
+                    {
+                        player.task = Player.Task.REVEAL;
+                    }
+                    player.MovePosition = mousePosInt;
+                    timeEnd = 0;
                 }
             }
             //Flag tile if it's revealed with an enemy
@@ -71,26 +71,26 @@ public class PlayerController : MonoBehaviour
             {
                 bool enemyOnTile = player.game.enemies
                     .Any(enemy => enemy.Position.toVector2Int() == mousePosInt);
-                    //Flag enemy tile without moving
-                    if (mouseInRange)
-                    {
-                if (enemyOnTile)
+                //Flag enemy tile without moving
+                if (mouseInRange)
                 {
+                    if (enemyOnTile)
+                    {
                         player.flagTile(mousePosInt);
                         stopTask();
                         startTickingTimer();
                     }
                 }
-                    //Move to position
-                    else
-                    {
+                //Move to position
+                else
+                {
                     if (enemyOnTile)
                     {
                         player.task = Player.Task.FLAG;
                     }
-                        player.MovePosition = mousePosInt;
-                        timeEnd = 0;
-                    }
+                    player.MovePosition = mousePosInt;
+                    timeEnd = 0;
+                }
             }
         }
 
