@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class Utility
 {
+    #region Vector Extensions
 
     public static Vector2Int toVector2Int(this Vector2 v)
     {
@@ -19,12 +20,6 @@ public static class Utility
         return v.normalized * distance;
     }
 
-    public static T randomItem<T>(this List<T> list)
-    {
-        int index = Random.Range(0, list.Count);
-        return list[index];
-    }
-
     public static int DistanceInt(Vector2Int vi1, Vector2Int vi2)
     {
         //includes moving diagonally as one move
@@ -33,4 +28,13 @@ public static class Utility
             Mathf.Abs(vi1.y - vi2.y)
             );
     }
+
+    #endregion
+
+    public static T randomItem<T>(this List<T> list)
+    {
+        int index = Random.Range(0, list.Count);
+        return list[index];
+    }
+
 }
