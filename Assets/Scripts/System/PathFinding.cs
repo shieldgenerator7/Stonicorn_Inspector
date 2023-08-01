@@ -33,11 +33,11 @@ public class PathFinding
 
         public static implicit operator bool(PathNode node) => node != null;
     }
-    public static List<Vector2Int> FindPath(Vector2 start, Vector2 end, Grid<bool> map1)
+    public static List<Vector2Int> FindPath(Vector2 start, Vector2 end, Grid<bool> map1, bool nullsWalkable = true)
     {
-        return FindPath(start.toVector2Int(), end.toVector2Int(), map1);
+        return FindPath(start.toVector2Int(), end.toVector2Int(), map1, nullsWalkable);
     }
-    public static List<Vector2Int> FindPath(Vector2Int start, Vector2Int end, Grid<bool> map1)
+    public static List<Vector2Int> FindPath(Vector2Int start, Vector2Int end, Grid<bool> map1, bool nullsWalkable = true)
     {
         //case: start not walkable
         if (!map1[start])
@@ -50,33 +50,37 @@ public class PathFinding
             return null;
         }
         //
-        List<PathNode> searchPositions;
+        List<Vector2Int> searchPositions;
         Grid<PathNode> map = map1.Map((b) => new PathNode(b));
         map.positions.ForEach(position => map[position].position = position);
         map[start].state = NoteState.Closed;
         //map[end].state = NoteState.Closed;
         //
         searchPositions = map.getNeighbors(start, 1)
-            .FindAll(pn => pn.Searachable);
-        searchPositions.ForEach(pn =>
+            .FindAll(pn => (pn && pn.Searachable) || nullsWalkable)
+            .ConvertAll(pn => pn.position);
+        searchPositions.ForEach(pos =>
         {
+            PathNode pn = map[pos];
             pn.parent = map[start];
             pn.pathLength = 1;
         });
-        searchPositions.Sort((a, b) => a.EstimatedDistance - b.EstimatedDistance);
+        searchPositions.Sort((a, b) => map[a].EstimatedDistance - map[b].EstimatedDistance);
         while (searchPositions.Count > 0)
         {
             //search
-            PathNode node = searchPositions[0];
+            PathNode node = map[searchPositions[0]];
             node.state = NoteState.Closed;
             if (node.position == end)
             {
                 break;
             }
-            List<PathNode> search = map.getNeighbors(node.position, 1)
-                .FindAll(pn => pn.Searachable);
-            search.ForEach(pn =>
+            List<Vector2Int> search = map.getNeighbors(node.position, 1)
+                .FindAll(pn => pn.Searachable)
+                .ConvertAll(pn => pn.position);
+            search.ForEach(pos =>
             {
+                PathNode pn = map[pos];
                 pn.parent = node;
                 pn.pathLength = node.pathLength + 1;
                 pn.goalDistance = Utility.DistanceInt(node.position, end);
@@ -84,7 +88,7 @@ public class PathFinding
 
             searchPositions.RemoveAt(0);
             searchPositions.AddRange(search);
-            searchPositions.Sort((a, b) => a.EstimatedDistance - b.EstimatedDistance);
+            searchPositions.Sort((a, b) => map[a].EstimatedDistance - map[b].EstimatedDistance);
         }
         //
         PathNode endNode = map[end];
