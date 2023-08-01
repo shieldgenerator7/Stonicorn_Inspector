@@ -103,7 +103,11 @@ public class Enemy : Entity
             //Move towards player
             if (!trapped)
             {
-                MovePosition = targetPos;
+                MovePosition = PathFinding.FindPath(
+                    pos,
+                    targetPos,
+                    game.planet.map.Map(tile => tile && !tile.Flagged)
+                    )?[0] ?? pos;
             }
             //Move as close to player as possible while trapped
             else
