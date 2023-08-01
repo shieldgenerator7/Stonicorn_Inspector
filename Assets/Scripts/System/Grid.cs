@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Grid<T> where T : class
+public class Grid<T>
 {
     private Dictionary<Vector2Int, T> grid = new Dictionary<Vector2Int, T>();
 
@@ -30,7 +30,7 @@ public class Grid<T> where T : class
     {
         if (!grid.ContainsKey(v))
         {
-            return null;
+            return default(T);
         }
         T t = grid[v];
         return t;
@@ -97,5 +97,19 @@ public class Grid<T> where T : class
             return new Vector2Int(keys.Max(v => v.x), keys.Max(v => v.y));
         }
     }
+    #endregion
+
+    #region Replicators
+
+    public Grid<K> Map<K>(Func<T, K> replicator)
+    {
+        Grid<K> kGrid = new Grid<K>();
+        foreach(Vector2Int vi in grid.Keys)
+        {
+            kGrid.add(vi, replicator(grid[vi]));
+        }
+        return kGrid;
+    }
+
     #endregion
 }
