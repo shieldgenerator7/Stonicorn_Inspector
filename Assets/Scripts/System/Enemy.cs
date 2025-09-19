@@ -109,6 +109,7 @@ public class Enemy : Entity
                     game.planet.map.Map(tile => tile && !tile.Flagged),
                     false
                     );
+                Debug.Log("path: "+path);
                 MovePosition = path?[0] ?? pos;
             }
             //Move as close to player as possible while trapped

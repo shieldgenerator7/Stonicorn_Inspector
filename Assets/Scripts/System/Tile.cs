@@ -32,6 +32,8 @@ public class Tile
     }
     public event OnBool onFlaggedChanged;
 
+    public int flaggedNeighborCount = 0;
+
     public Tile(Vector2Int pos)
     {
         this.position = pos;

@@ -42,16 +42,19 @@ public class PathFinding
         //case: start not walkable
         if (!map1[start])
         {
+            Debug.Log("start blocked");
             return null;
         }
         //case: end not walkable
         if (!map1[end])
         {
+            Debug.Log("end blocked");
             return null;
         }
         //
         List<Vector2Int> searchPositions;
         Grid<PathNode> map = map1.Map((b) => new PathNode(b));
+        
         map.positions.ForEach(position => map[position].position = position);
         map[start].state = NoteState.Closed;
         //map[end].state = NoteState.Closed;
@@ -86,15 +89,24 @@ public class PathFinding
                 pn.goalDistance = Utility.DistanceInt(node.position, end);
             });
 
+            if (search.Contains(end))
+            {
+                map[end].parent = node;
+                Debug.Log("end found");
+                break;
+            }
+
             searchPositions.RemoveAt(0);
             searchPositions.AddRange(search);
             searchPositions.Sort((a, b) => map[a].EstimatedDistance - map[b].EstimatedDistance);
+
         }
         //
         PathNode endNode = map[end];
         //case: no path was found
         if (!endNode.parent)
         {
+            Debug.Log("path not found");
             return null;
         }
         //case: path was found

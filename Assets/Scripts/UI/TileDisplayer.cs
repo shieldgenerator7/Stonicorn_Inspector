@@ -48,6 +48,7 @@ public class TileDisplayer : MonoBehaviour
     private void forceUpdate()
     {
         onRevealedChanged(tile.Revealed);
+        onFlaggedChanged(tile.Flagged);
     }
 
     private void onRevealedChanged(bool revealed)
